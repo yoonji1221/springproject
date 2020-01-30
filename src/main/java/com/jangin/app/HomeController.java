@@ -1,4 +1,4 @@
-package com.gomul.app;
+package com.jangin.app;
 
 import java.text.DateFormat;
 import java.util.Date;
