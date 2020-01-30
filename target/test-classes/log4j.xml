@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.gomul.app">
+	<logger name="com.jangin.app">
 		<level value="info" />
 	</logger>
 	
