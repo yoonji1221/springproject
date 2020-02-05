@@ -1,5 +1,5 @@
 package center;
-
+///sdfg
 public class CenterVO {
 
 	String mnnstNm;
