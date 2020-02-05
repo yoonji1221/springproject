@@ -5,8 +5,9 @@ public class ManageVO {
 	int vid;
 	int mid;
 	String realTime;
-	int cid;
 	int progrmRegistNo;
+	int cid;
+	String actPlace;
 	public int getVid() {
 		return vid;
 	}
@@ -37,5 +38,12 @@ public class ManageVO {
 	public void setProgrmRegistNo(int progrmRegistNo) {
 		this.progrmRegistNo = progrmRegistNo;
 	}
+	public String getActPlace() {
+		return actPlace;
+	}
+	public void setActPlace(String actPlace) {
+		this.actPlace = actPlace;
+	}
 
+	
 }

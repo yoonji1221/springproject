@@ -4,7 +4,7 @@ public class CenterVO {
 
 	String mnnstNm;
 	int cid;
-	String caddr;
+	String actplace;
 	String nanmmbyNm;
 	String nanmmbyNmAdmn;
 	String email;
@@ -22,11 +22,11 @@ public class CenterVO {
 	public void setCid(int cid) {
 		this.cid = cid;
 	}
-	public String getCaddr() {
-		return caddr;
+	public String getActplace() {
+		return actplace;
 	}
-	public void setCaddr(String caddr) {
-		this.caddr = caddr;
+	public void setActplace(String actplace) {
+		this.actplace = actplace;
 	}
 	public String getNanmmbyNm() {
 		return nanmmbyNm;
@@ -58,5 +58,5 @@ public class CenterVO {
 	public void setTelno(String telno) {
 		this.telno = telno;
 	}
-	
+
 }
