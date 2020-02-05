@@ -9,6 +9,7 @@
 <typeAlias type="test2.TestVO" alias="vo"/>
 </typeAliases>
 
+
 <!-- 1. 드라이버, ip, port, 계정 암호 설정 -->
 <environments default="mydb">
 
@@ -27,7 +28,5 @@
 <mappers>
  <mapper resource="test2/test-mapping.xml"/>
 </mappers>
-
-
 
 </configuration>
