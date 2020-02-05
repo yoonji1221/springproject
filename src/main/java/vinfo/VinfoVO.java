@@ -1,5 +1,5 @@
 package vinfo;
-
+//  llk
 public class VinfoVO {
 
 	int progrmRegistNo;
