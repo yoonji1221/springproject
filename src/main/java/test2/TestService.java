@@ -9,5 +9,7 @@ public interface TestService {
 	
 	//동적 조회
 	public List<TestVO> getEmpDynamicwhere(HashMap<String, String> map);
-
+	
+	public List<TestVO> vinfoinsert(HashMap<String, Object> map);
+	
 }

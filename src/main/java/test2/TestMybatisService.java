@@ -27,5 +27,10 @@ public class TestMybatisService implements TestService{
 		return dao.getEmpDynamicwhere(map);
 	}
 
+	@Override
+	public List<TestVO> vinfoinsert(HashMap<String, Object> map) {
+		return dao.insertvinfo(map);
+	}
+
 
 }

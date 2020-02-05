@@ -26,4 +26,7 @@ public class TestDAO {
 		return session.selectList("test.insert", map);
 	}
 
+	public List<TestVO> insertvinfo(HashMap<String, Object> map){
+		return session.selectList("test.vinfoinsert", map);
+	}
 }
