@@ -9,25 +9,6 @@
 <typeAlias type="test2.TestVO" alias="vo"/>
 </typeAliases>
 
-<!-- 1. 드라이버, ip, port, 계정 암호 설정 -->
-<environments default="mydb">
-
- <environment id="mydb">
-  <transactionManager type="JDBC"/>
-  <dataSource type="POOLED"> <!-- 일정 갯수 con pool 생성 -->
-   <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-   <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-   <property name="username" value="hr"/>
-   <property name="password" value="hr"/>
-  </dataSource>
- </environment>
-</environments>
-
-<!-- 2. 테이블 관련 sql 정의 매핑파일 설정  -->
-<mappers>
- <mapper resource="test2/test-mapping.xml"/>
-</mappers>
-
 
 
 </configuration>

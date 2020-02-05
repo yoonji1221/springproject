@@ -1,5 +1,7 @@
 package test2;
 
+import org.springframework.stereotype.Component;
+
 public class TestVO {
 	//vinfo
 	int progrmRegistNo; //ºÀ»ç¹øÈ£

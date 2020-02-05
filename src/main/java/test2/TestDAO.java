@@ -2,7 +2,6 @@ package test2;
 
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,19 +10,19 @@ import org.springframework.stereotype.Component;
 public class TestDAO {
 	
 	@Autowired
-	SqlSession session;
+	SqlSession sqlSession;
 
 	public void setSession(SqlSession session) {
-		this.session = session;
+		this.sqlSession = session;
 	}
 	
 	public List<TestVO> getList(){
-		List<TestVO> list = session.selectList("");
+		List<TestVO> list = sqlSession.selectList("");
 		return list;
 	}
 	
 	public List<TestVO> getEmpDynamicwhere(HashMap<String, String> map){
-		return session.selectList("test.insert", map);
+		return sqlSession.selectList("test.insert", map);
 	}
 
 }
