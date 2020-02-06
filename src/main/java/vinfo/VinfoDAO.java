@@ -1,4 +1,4 @@
-package volunteer;
+package vinfo;
 
 import java.util.List;
 
@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class VolunteerDAO {
+public class VinfoDAO {
 	
 	@Autowired
 	SqlSession session;
 	
 	//홈화면 - 전체 봉사 조회
-	public List<VolunteerVO> volunteerlist(){
+	public List<VinfoVO> vinfolist(){
 		return session.selectList("volunteer.allvolunteer");
 	}
 	

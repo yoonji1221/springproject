@@ -1,4 +1,4 @@
-package volunteer;
+package vinfo;
 
 import java.util.List;
 
@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class VolunteerServiceImpl implements VolunteerService {
+public class VinfoServiceImpl implements VinfoService {
 	@Autowired
-	VolunteerDAO dao;
+	VinfoDAO dao;
 
 	@Override
-	public List<VolunteerVO> volunteerlist() {
-		return dao.volunteerlist();
+	public List<VinfoVO> vinfolist() {
+		return dao.vinfolist();
 	}
 	
 }

@@ -1,4 +1,4 @@
-package volunteer;
+package vinfo;
 
 import java.util.List;
 
@@ -8,19 +8,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class VolunteerController {
+public class VinfoController {
 
 	@Autowired
-	VolunteerService service;
+	VinfoService service;
 	
 	//봉사 전체 리스트
-	@RequestMapping("/vlist")
+	@RequestMapping("/vinfolist")
 	public ModelAndView boardList() {
 		ModelAndView mav = new ModelAndView();
-		List<VolunteerVO> list = service.volunteerlist();
+		List<VinfoVO> list = service.vinfolist();
 		
-		mav.addObject("vlist", list);
-		mav.setViewName("volunteerAllList");
+		mav.addObject("vinfolist", list);
+		mav.setViewName("vinfoAllList");
 		return mav;
 	
 	} 

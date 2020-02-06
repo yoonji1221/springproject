@@ -6,7 +6,7 @@
 <configuration>
 <!-- 0.typealias -->
 <typeAliases>
-<typeAlias type="volunteer.VolunteerVO" alias="volvo"/>
+<typeAlias type="vinfo.VinfoVO" alias="vinfovo"/>
 </typeAliases>
 
 
