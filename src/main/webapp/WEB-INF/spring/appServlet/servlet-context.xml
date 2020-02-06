@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="test2" />
-	
+	<context:component-scan base-package="volunteer" />
 	
 	
 </beans:beans>

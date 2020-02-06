@@ -16,16 +16,16 @@
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-<property name="username" value="hr"/>
-<property name="password" value="hr"/>
+<property name="username" value="bong4"/>
+<property name="password" value="134"/>
 </bean>
 
 <!-- 2. Mybatis의 SqlSessionFactory 생성
 		을 spring에서는 sqlSessionFactoryBean 으로 설정 -->
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 <property name="dataSource" ref="dataSource"></property>
-<property name="configLocation" value="classpath:/test2/test-config.xml"></property>
-<property name="mapperLocations" value="classpath:/test2/test-mapping.xml"></property>
+<property name="configLocation" value="classpath:/admin/admin-config.xml"></property>
+<property name="mapperLocations" value="classpath:/admin/admin-mapping.xml"></property>
 </bean>
 
 <!-- 3. mybatis -Sqlsession 객체
