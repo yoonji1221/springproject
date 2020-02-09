@@ -7,6 +7,9 @@
 <!-- 0.typealias -->
 <typeAliases>
 <typeAlias type="vinfo.VinfoVO" alias="vinfovo"/>
+<typeAlias type="preference.PagingVO" alias="pagingvo"/>
+<typeAlias type="preference.PreferenceVO" alias="preferencevo"/>
+<typeAlias type="volunteer.VolunteerVO" alias="volunteervo"/>
 </typeAliases>
 
 

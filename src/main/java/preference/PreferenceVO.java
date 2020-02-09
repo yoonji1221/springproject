@@ -2,18 +2,19 @@ package preference;
 
 public class PreferenceVO {
 	String large;
-	String small;
+	String medium;
 	public String getLarge() {
 		return large;
 	}
 	public void setLarge(String large) {
 		this.large = large;
 	}
-	public String getSmall() {
-		return small;
+	public String getMedium() {
+		return medium;
 	}
-	public void setSmall(String small) {
-		this.small = small;
+	public void setMedium(String medium) {
+		this.medium = medium;
 	}
+	
 	
 }

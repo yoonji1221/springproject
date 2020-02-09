@@ -1,16 +1,44 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="vinfo">
-<select id="vinfolist">
-select 
-</select>
-
-
-
-
-
+<mapper namespace="db">
+	<!-- 홈화면 봉사리스트 전체 조회 -->
+	<select id="vinfolist" resultType="vinfovo">
+	select progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+	rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace
+	from vinfo
+	</select>
+	
+	<!-- 회원가입 화면에서 선호도 불러오기 위한 -->
+	<select id="preferlist" resultType="preferencevo">
+	select distinct(large) from preference
+	</select>
+	
+	
+	<!-- 회원가입 화면에서 medium선호도 불러오기 위한 -->
+	<select id="mediumlist" resultType="preferencevo" parameterType="String">
+	select medium from preference where large = #{value}
+	</select>
+	<!-- 페이징 처리 위한 총 게시물 수 -->
+	<select id="getpaging" resultType="int">
+	select count(*) from vinfo 
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="vinfolistPaging" resultType="vinfovo" parameterType="pagingvo">
+	select progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+	rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace 
+	from (select rownum rn, a.* from 
+	( select * from vinfo order by progrmBgnde desc) a
+	) 
+	where rn between #{start} and #{end}
+	</select>
+	
+	<!-- id 중복체크 -->
+	<select id="idcheck" parameterType="String" resultType="int">
+	select count(id) from volunteer where id = #{value}
+	</select>
 </mapper>
 
 <!-- 값을 넘길때 # 컬럼 넘길때 $ -->

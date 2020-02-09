@@ -21,8 +21,9 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="test2" />
+	<context:component-scan base-package="admin" />
+	<context:component-scan base-package="vinfo" />
 	<context:component-scan base-package="volunteer" />
-	
+	<context:component-scan base-package="preference" />
 	
 </beans:beans>

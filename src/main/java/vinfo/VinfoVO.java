@@ -10,7 +10,7 @@ public class VinfoVO {
 	int rcritNmpr;
 	int appTotal;
 	String srvcClCode;
-	String programSj;
+	String progrmSj;
 	String progrmCn;
 	String actEndTm;
 	int cid;
@@ -63,11 +63,11 @@ public class VinfoVO {
 	public void setSrvcClCode(String srvcClCode) {
 		this.srvcClCode = srvcClCode;
 	}
-	public String getProgramSj() {
-		return programSj;
+	public String getProgrmSj() {
+		return progrmSj;
 	}
-	public void setProgramSj(String programSj) {
-		this.programSj = programSj;
+	public void setProgrmSj(String progrmSj) {
+		this.progrmSj = progrmSj;
 	}
 	public String getProgrmCn() {
 		return progrmCn;
