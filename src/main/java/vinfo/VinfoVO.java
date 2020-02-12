@@ -15,6 +15,26 @@ public class VinfoVO {
 	String actEndTm;
 	int cid;
 	String actPlace;
+	String progrmEndde;
+	String actWkdy;
+	String postAdres;
+	public VinfoVO() {
+
+	}
+
+	public VinfoVO(VinfoVO vo, String large, String medium) {
+		setProgrmRegistNo(vo.progrmRegistNo);
+		setProgrmSj(vo.progrmSj);
+		setProgrmBgnde(vo.progrmBgnde);
+		setActBeginTm(vo.actBeginTm);
+		setActEndTm(vo.actEndTm);
+		setNoticeBgnde(vo.noticeBgnde);
+		setNoticeEndde(vo.noticeEndde);
+		setRcritNmpr(vo.rcritNmpr);
+		setActPlace(vo.actPlace);
+		setProgrmCn(vo.progrmCn);
+		srvcClCode=large+" > "+medium;
+	}
 	public int getProgrmRegistNo() {
 		return progrmRegistNo;
 	}
@@ -93,6 +113,24 @@ public class VinfoVO {
 	public void setActPlace(String actPlace) {
 		this.actPlace = actPlace;
 	}
-
+	public String getProgrmEndde() {
+		return progrmEndde;
+	}
+	public void setProgrmEndde(String progrmEndde) {
+		this.progrmEndde = progrmEndde;
+	}
+	public String getActWkdy() {
+		return actWkdy;
+	}
+	public void setActWkdy(String actWkdy) {
+		this.actWkdy = actWkdy;
+	}
+	public String getPostAdres() {
+		return postAdres;
+	}
+	public void setPostAdres(String postAdres) {
+		this.postAdres = postAdres;
+	}
+	
 
 }

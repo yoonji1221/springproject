@@ -19,7 +19,6 @@ public class PreferenceController {
 	@RequestMapping("/volunjoin")
 	public ModelAndView joinVolunteer() {
 		ModelAndView mav = new ModelAndView();
-
 		List<PreferenceVO> prelist = preservice.getPreList();
 		mav.addObject("prelist", prelist);
 		mav.setViewName("volunJoinPage");
@@ -30,9 +29,8 @@ public class PreferenceController {
 	@RequestMapping(value = "/volunjoin/precheck", method = RequestMethod.GET)
 	@ResponseBody
 	public List<PreferenceVO> idcheck(@RequestParam("selected_large") String selected_large) {
-
 		List<PreferenceVO> mlist = preservice.getMediumList(selected_large);
-		System.out.println(mlist.size()+"사이즈");
+		//System.out.println(mlist.size()+"사이즈");
 		return mlist;
 	}
 

@@ -5,40 +5,348 @@
 <mapper namespace="db">
 	<!-- 홈화면 봉사리스트 전체 조회 -->
 	<select id="vinfolist" resultType="vinfovo">
-	select progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
-	rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace
-	from vinfo
+		select
+		progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+		rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace
+		from
+		vinfo
 	</select>
-	
-	<!-- 회원가입 화면에서 선호도 불러오기 위한 -->
+
+	<!-- 회원가입 화면에서 large 선호도 불러오기 -->
 	<select id="preferlist" resultType="preferencevo">
-	select distinct(large) from preference
+		select distinct(large) from
+		preference
 	</select>
-	
-	
-	<!-- 회원가입 화면에서 medium선호도 불러오기 위한 -->
-	<select id="mediumlist" resultType="preferencevo" parameterType="String">
-	select medium from preference where large = #{value}
+
+	<!-- 회원가입 화면에서 medium 선호도 불러오기 -->
+	<select id="mediumlist" resultType="preferencevo"
+		parameterType="String">
+		select medium from preference where large = #{value}
 	</select>
 	<!-- 페이징 처리 위한 총 게시물 수 -->
 	<select id="getpaging" resultType="int">
-	select count(*) from vinfo 
+		select count(*) from vinfo
 	</select>
-	
+
 	<!-- 페이징 -->
-	<select id="vinfolistPaging" resultType="vinfovo" parameterType="pagingvo">
-	select progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
-	rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace 
-	from (select rownum rn, a.* from 
-	( select * from vinfo order by progrmBgnde desc) a
-	) 
-	where rn between #{start} and #{end}
+	<select id="vinfolistPaging" resultType="vinfovo"
+		parameterType="pagingvo">
+		select
+		progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+		rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace
+		from
+		(select rownum rn, a.* from
+		( select * from vinfo order by progrmBgnde
+		desc) a
+		)
+		where rn between #{start} and #{end}
 	</select>
-	
+
 	<!-- id 중복체크 -->
 	<select id="idcheck" parameterType="String" resultType="int">
-	select count(id) from volunteer where id = #{value}
+		select
+		count(id) from volunteer where id = #{value} and pw = #{pw}
 	</select>
+
+	<!-- 봉사자 로그인 -->
+	<select id="volunlogin" parameterType="volunteervo"
+		resultType="int">
+		select count(id) from volunteer where id=#{id} and pw=#{pw}
+	</select>
+
+	<!-- 봉사자 회원가입 -->
+	<insert id="join" parameterType="volunteervo">
+		insert into volunteer (vid, id,
+		pw, address, mail, phone, preference1, preference2, preference3, name,
+		gender)
+		values(VOL_SEQ.nextval,#{id}, #{pw}, #{address}, #{mail},
+		#{phone}, #{preference1}, #{preference2},
+		#{preference3}, #{name},
+		#{gender})
+	</insert>
+
+	<!-- 센터 로그인 -->
+	<select id="centerlogin" parameterType="centervo"
+		resultType="int">
+		select count(cid) from center where email = #{email} and
+		cid = #{cid}
+	</select>
+
+	<!-- 관리자 로그인 -->
+	<select id="adminlogin" resultType="adminvo">
+		select * from admin
+	</select>
+
+	<!-- 봉사 지역 검색 (도) -->
+	<select id="silist" resultType="vinfovo">
+		select
+		distinct(substr(postadres,1,(instr(postadres,' ')-1))) postadres from
+		vinfo order by postadres asc
+	</select>
+
+	<!-- 봉사 지역 검색 detail -->
+	<select id="detailaddress" parameterType="String"
+		resultType="vinfovo">
+		SELECT distinct(SUBSTR(postadres, INSTR(postadres, ' ', 1,
+		1) + 1,
+		INSTR(postadres, ' ', 1, 2) - INSTR(postadres, ' ', 1, 1) - 1))
+		postadres
+		from vinfo where postadres like '%'||#{value}||'%' order by
+		postadres asc
+	</select>
+
+	<!-- 조건 검색 -->
+	<select id="searchadres" parameterType="String"
+		resultType="vinfovo">
+		select postAdres,
+		progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+		rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace from
+		vinfo where postAdres like '%'||#{value}||'%'
+	</select>
+
+	<!-- 조건 검색2 -->
+	<select id="searchprefer" parameterType="String"
+		resultType="vinfovo">
+		select postAdres,
+		progrmRegistNo,progrmBgnde,actBeginTm,noticeBgnde,noticeEndde,
+		rcritNmpr,appTotal,srvcClCode,progrmSj,progrmCn,actEndTm,actPlace from
+		vinfo where srvcClCode like '%'||#{value}||'%'
+	</select>
+
+	<select id="searchresult" parameterType="parametervo"
+		resultType="vinfovo">
+		select * from vinfo
+		<where>
+			<if
+				test='detailprefer=="전체" and detailaddress!=null and address!=null and preference!=null'> <!-- 봉사지역 2개, 봉사분야 앞에 1개 검색 -->
+				srvcclcode like '%' || #{preference} || '%' and postadres like '%'
+				|| #{detailaddress} || '%'
+			</if>
+			<if
+				test='detailprefer!=null and detailaddress=="전체" and address!=null and preference!=null'> <!-- 봉사지역 1개, 봉사분야 앞에 2개 검색 -->
+				srvcclcode like '%' || #{detailprefer} || '%' and postadres like '%'
+				|| #{address} || '%'
+			</if>
+		</where>
+	</select>
+	<select id="fronttworesult" parameterType="parametervo"
+		resultType="vinfovo"> <!-- 큰거두개만 -->
+		select * from vinfo where srvcclcode like '%' || #{preference} || '%'
+		and postadres like '%' || #{address} || '%'
+	</select>
+	<select id="allsearchresult" parameterType="parametervo"
+		resultType="vinfovo"> <!-- 4개 다 검색 -->
+		select * from vinfo where srvcclcode like '%' || #{detailprefer} ||
+		'%' and postadres like '%' || #{detailaddress} || '%'
+	</select>
+	<select id="prefersearch" parameterType="parametervo"
+		resultType="vinfovo"> <!-- 분야만검색 -->
+		select * from vinfo where srvcclcode like '%' || #{detailprefer} ||
+		'%'
+	</select>
+	<select id="addresssearch" parameterType="parametervo"
+		resultType="vinfovo"> <!-- 지역만검색 -->
+		select * from vinfo where postadres like '%' || #{detailaddress} ||
+		'%'
+	</select>
+	<select id="bigprefer" parameterType="parametervo"
+		resultType="vinfovo"> <!-- 선호도 앞에만 검색 -->
+		select * from vinfo where postadres like '%' || #{preference} || '%'
+	</select>
+	<select id="vinfodetail" parameterType="int"
+		resultType="vinfovo"> <!--봉사 detail -->
+		select * from vinfo where progrmRegistNo = #{progrmRegistNo}
+	</select>
+	<!-- 관리자화면 회원목록 뽑기 -->
+	<select id="adminuserlist" resultType="volunteervo">
+	select * from volunteer
+	</select>
+	<!-- 관리자화면 회원탈퇴 -->
+	<delete id="deleteuser" parameterType="String">
+	delete from volunteer where id = #{value}
+	</delete>
+	<!-- 관리자화면 회원탈퇴하면 리뷰쓴것도 삭제 -->
+	<delete id="deletereview" parameterType="String">
+	delete from review  where not exists (select vid from volunteer where id=#{value}
+	</delete>
+	<!-- //////////효진////////// -->
+	<!-- vid 가져오기 -->
+<select resultType="int" id="volunlogin2" parameterType="volunteervo"> select vid from volunteer where id=#{id} and pw=#{pw} </select>
+	
+	<!-- 회원마이페이지에서 회원정보수정 전 이전 정보 보여주기 -->
+	<select id="getVolunteer" resultType="volunteervo"
+		parameterType="int">
+		select * from volunteer where vid=#{vid}
+	</select>
+
+	<!-- 봉사자 정보 수정 -->
+	<select id="updateVolunteer" parameterType="volunteervo">
+		update volunteer
+		set pw=#{pw}, phone=#{phone}, mail=#{mail}, address=#{address},
+		preference1=#{preference1}, preference2=#{preference2},
+		preference3=#{preference3}
+		where vid = #{vid}
+	</select>
+
+	<!-- 회원마이페이지에서 봉사정보 조회 / 달력 & 신청 현황 페이지 -->
+	<select id="progrmInfo" resultType="vinfovo" parameterType="int">
+		select progrmRegistNo, progrmBgnde, progrmSj, actPlace, appTotal,
+		rcritNmpr
+		from vinfo
+		where progrmRegistNo in (select progrmRegistNo
+		from manage
+		where vid = #{vid})
+	</select>
+
+	<!-- 회원마이페이지에서 회원이 봉사활동을 완료한 봉사 상세 정보 조회 페이지 (1) -->
+	<select id="volunDetail1" resultType="vinfovo"
+		parameterType="int">
+		select *
+		from vinfo
+		where progrmRegistNo = #{progrmRegistNo}
+	</select>
+
+	<!-- 회원마이페이지에서 회원이 봉사활동을 완료한 봉사 상세 정보 조회 페이지 (2) -->
+	<select id="volunDetail2" resultType="string"
+		parameterType="int">
+		select mnnstNm
+		from center
+		where cid = (select cid from vinfo where progrmRegistNo =
+		#{progrmRegistNo})
+	</select>
+
+	<!-- 봉사자의 봉사취소 -->
+	<delete id="deleteManage" parameterType="managevo">
+		delete manage where progrmRegistNo = #{progrmRegistNo} and vid = #{vid}
+	</delete>
+
+	<!-- 봉사 신청 -->
+	<insert id="insertManage" parameterType="managevo">
+		insert into manage values (#{vid}, (select max(mid)+1 from manage), 0,
+		#{progrmRegistNo}, #{cid}, #{actPlace})
+	</insert>
+
+	<!--////////// 신지 코드////////// -->
+	<!-- 대분류(분야선택) -->
+
+
+	<select resultType="String" id="allfield"> select distinct large from
+		preference </select>
+
+	<!-- 중분류(분야선택) -->
+
+
+	<select resultType="String" id="m"> select medium from preference
+	</select>
+
+	<!-- 분야선택 ajax -->
+
+
+	<select resultType="vinfovo" id="mediumfield"
+		parameterType="String"> select medium from preference where large = #{value}
+	</select>
+
+	<!-- 봉사정보입력 -->
+
+
+	<insert id="insertvinfo" parameterType="vinfovo"> insert into vinfo
+		(progrmRegistNo,progrmSj,progrmBgnde, actBeginTm, apptotal,actEndTm,
+		noticeBgnde,noticeEndde, rcritNmpr,actPlace,progrmCn,srvcClCode)
+		values ( (select max(progrmregistno)+1 from vinfo), #{progrmSj},
+		#{progrmBgnde}, #{actBeginTm}, #{actEndTm},
+		0,#{noticeBgnde},#{noticeEndde},#{rcritNmpr} , #{actPlace},
+		#{progrmCn},#{srvcClCode}) </insert>
+
+	<!-- review list 목록 -->
+
+
+	<select resultType="reviewvo" id="reviewlist"> select rid, title, viewcount,
+		time, name, progrmsj, m.mid from review r, manage m, volunteer v,
+		vinfo f where r.mid=m.mid and v.vid=m.vid and f.progrmregistno=
+		m.progrmregistno </select>
+
+	<!-- 내가 쓴 review list 목록 -->
+
+
+	<select id="myreviewlist" resultType="reviewvo"  parameterType="int"> 
+	select rid, title, viewcount,
+		time, name, progrmsj, m.mid from review r, manage m, volunteer v,
+		vinfo f where r.mid=m.mid and v.vid=m.vid and f.progrmregistno=
+		m.progrmregistno and v.vid=#{vid} </select>
+
+	<!-- review detail -->
+
+
+	<select resultType="reviewvo" id="reviewdetail"
+		parameterType="int"> select * from review where rid=#{rid} </select>
+
+	<!-- 리뷰 클릭시 조회수 1증가 -->
+
+
+	<update id="updateviewcount"> update review set viewcount=viewcount+1 </update>
+
+	<!-- 리뷰 작성 -->
+
+
+	<insert id="reviewwrite" parameterType="reviewvo"> insert into review (rid,
+		title, mid, contents, viewcount, time) values ((select max(rid)+1 from
+		review), #{title},3, #{contents},0, sysdate) </insert>
+
+	<!-- 리뷰 수정을 위한 select -->
+
+
+	<select resultType="String" id="reviewselect"
+		parameterType="int"> select * from review where mid=#{mid} </select>
+
+	<!-- 리뷰 수정 -->
+
+
+	<update id="reviewupdate" parameterType="reviewvo"> update review set
+		title=#{title}, contents=#{contents}, time=sysdate where mid=#{mid}
+	</update>
+
+	<!-- 리뷰삭제 -->
+
+
+	<delete id="reviewdelete" parameterType="int"> delete from review
+		where mid=#{mid} </delete>
+
+	<!-- 센터정보 자세히보기 -->
+
+
+	<select resultType="centervo" id="centerdetail"
+		parameterType="int"> select * from center where cid = #{cid} </select>
+<!-- 다연이 -->
+<select id="mycentercallist" resultType="vinfovo" parameterType="int">
+select *
+from vinfo
+where cid=#{cid}
+</select>
+
+<select id="centermypagelist" resultType="centervo" parameterType="int">
+select *
+from center
+where cid=#{cid}
+</select>
+
+<update id="centermypageupdate" parameterType="centervo">
+update center
+set mnnstNm=#{mnnstNm}, nanmmbyNm=#{nanmmbyNm}, nanmmbyNmAdmn=#{nanmmbyNmAdmn}, telno=#{telno}
+where cid=#{cid}
+</update>
+
+<select id="managelist1" resultType="int" parameterType="int">
+select distinct(f.progrmregistno)
+from volunteer v, vinfo f, manage m
+where f.cid = m.cid
+and m.progrmregistno= f.progrmregistno
+and m.cid = #{cid} 
+</select>
+<select id="managelist2" resultType="String" parameterType="int">
+select progrmsj from vinfo where progrmregistno =#{progrmregistno}
+
+</select>
+
 </mapper>
 
 <!-- 값을 넘길때 # 컬럼 넘길때 $ -->

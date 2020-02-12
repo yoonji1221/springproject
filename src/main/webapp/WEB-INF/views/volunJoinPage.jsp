@@ -65,7 +65,7 @@ $(function(){
     			$("#med1").empty();
     			for(var idx in category_list){
     				var data = category_list[idx]['medium']
-    	            var option = $("<option>"+data+"</option>");
+    	            var option = $("<option value='"+data+"'>"+data+"</option>");
 	                $("#med1").append(option);
     			}
     			}, error : function(e) {
@@ -83,7 +83,7 @@ $(function(){
     			$("#med2").empty();
     			for(var idx in category_list){
     				var data = category_list[idx]['medium']
-    	            var option = $("<option>"+data+"</option>");
+    	            var option = $("<option value='"+data+"'>"+data+"</option>");
 	                $("#med2").append(option);
     			}
     			}, error : function(e) {
@@ -92,9 +92,9 @@ $(function(){
     		});
     	})
     	
-    	 $("#lar3").change(function(){
+    	$("#lar3").change(function(){
     	var selected_large = $("#lar3 option:selected").val();
-    	console.log( selected_large);
+    	console.log(selected_large);
     	$.ajax({
     		url : '/volunteer134/volunjoin/precheck?selected_large='+ selected_large,
     		type : 'get',
@@ -102,7 +102,7 @@ $(function(){
     			$("#med3").empty();
     			for(var idx in category_list){
     				var data = category_list[idx]['medium']
-    	            var option = $("<option>"+data+"</option>");
+    	            var option = $("<option value='"+data+"'>"+data+"</option>");
 	                $("#med3").append(option);
     			}
     			}, error : function(e) {
@@ -118,8 +118,8 @@ $(function(){
 <body>
 
 <h1>회원가입</h1>
-<form action="<%=path %>/" method="get"> <!-- 값확인위해서 get, 추후에 post로 바꿀것!!!!! -->
-이름 : <input type="text" name="name" ><br>
+<form action="<%=path %>/volunjoin" method="post">
+이름 : <input type="text" id="name"name="name"><br>
 아이디 : <input type="text" id="id" name="id"><br>
 <span id="id_check"></span><br>
 비밀번호 : <input type="password" id="userPw" name="pw" class="form-control"><br>
@@ -127,37 +127,39 @@ $(function(){
 <span id="chkNotice"></span><br>
 전화번호 : <input type="text" name="phone" id="phone" class="form-control"><br> 
 주소 : <input type="text" name="address"><br>
-이메일 : <input type="text" name="email"><br>
+이메일 : <input type="text" name="mail"><br>
 남성 <input type="radio" name="gender" value="male">
 여성 <input type="radio" name="gender" value="female"><br>
 선호 봉사 :
-<select name="large" id="lar1">
+<select name="large1" id="lar1" >
+<option>선택안함</option>
    <c:forEach items="${prelist }" var="prelist">
-      <option value="${prelist.large}">${prelist.large}</option>
+      <option value="${prelist.large}" name="large1">${prelist.large}</option>
    </c:forEach> 
 </select>
-<select name="medium" id="med1">
+<select name="medium1" id="med1">
 </select><br>
 선호 봉사 :
-<select name="large" id="lar2">
+<select name="large2" id="lar2" >
+<option>선택안함</option>
    <c:forEach items="${prelist }" var="prelist">
-      <option value="${prelist.large}">${prelist.large}</option>
+      <option value="${prelist.large}" name="large2">${prelist.large}</option>
    </c:forEach> 
 </select>
-<select name="medium" id="med2">
+<select name="medium2" id="med2">
    
 </select><br>
 선호 봉사 :
-<select name="large" id="lar3">
+<select name="large3" id="lar3" >
+<option>선택안함</option>
    <c:forEach items="${prelist }" var="prelist">
-      <option value="${prelist.large}">${prelist.large}</option>
+      <option value="${prelist.large}" name="large3">${prelist.large}</option>
    </c:forEach> 
 </select>
-<select name="medium" id="med3">
+<select name="medium3" id="med3">
    
 </select><br>
-<input type="hidden" name="move" value="join">
-<br><input type="button" value="회원가입완료" >
+<br><input type="submit" value="회원가입완료" >
 </form>
 </body>
 </html>

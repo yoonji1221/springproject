@@ -22,8 +22,10 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="admin" />
-	<context:component-scan base-package="vinfo" />
-	<context:component-scan base-package="volunteer" />
+	<context:component-scan base-package="center" />
 	<context:component-scan base-package="preference" />
-	
+	<context:component-scan base-package="vinfo" />
+	<context:component-scan base-package="review" />
+	<context:component-scan base-package="manage" />
+	<context:component-scan base-package="volunteer" />
 </beans:beans>

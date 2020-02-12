@@ -6,10 +6,18 @@
 <configuration>
 <!-- 0.typealias -->
 <typeAliases>
+
+
+<typeAlias type="manage.ManageVO" alias="managevo"/>
+<typeAlias type="review.ReviewVO" alias="reviewvo"/>
 <typeAlias type="vinfo.VinfoVO" alias="vinfovo"/>
+<typeAlias type="vinfo.ParameterVO" alias="parametervo"/>
 <typeAlias type="preference.PagingVO" alias="pagingvo"/>
 <typeAlias type="preference.PreferenceVO" alias="preferencevo"/>
 <typeAlias type="volunteer.VolunteerVO" alias="volunteervo"/>
+<typeAlias type="volunteerMypage.VolunteerVO" alias="volunteermypagevo"/>
+<typeAlias type="center.CenterVO" alias="centervo"/>
+<typeAlias type="admin.AdminVO" alias="adminvo"/>
 </typeAliases>
 
 

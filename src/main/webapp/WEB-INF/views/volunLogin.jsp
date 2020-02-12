@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1>봉사자 로그인</h1>
+<form action="volunlogin" method="post">
+아이디  <input type="text" name="id"><br>
+비밀번호  <input type="password" name="pw" ><br>
+<input type="submit" value="로그인" >
+</form>
 </body>
 </html>
