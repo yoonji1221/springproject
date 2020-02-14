@@ -4,10 +4,11 @@ public class ManageVO {
 
 	int vid;
 	int mid;
-	String realTime;
+	int realTime;
 	int progrmRegistNo;
 	int cid;
 	String actPlace;
+	String postAdres;
 	public int getVid() {
 		return vid;
 	}
@@ -20,17 +21,11 @@ public class ManageVO {
 	public void setMid(int mid) {
 		this.mid = mid;
 	}
-	public String getRealTime() {
+	public int getRealTime() {
 		return realTime;
 	}
-	public void setRealTime(String realTime) {
+	public void setRealTime(int realTime) {
 		this.realTime = realTime;
-	}
-	public int getCid() {
-		return cid;
-	}
-	public void setCid(int cid) {
-		this.cid = cid;
 	}
 	public int getProgrmRegistNo() {
 		return progrmRegistNo;
@@ -38,12 +33,23 @@ public class ManageVO {
 	public void setProgrmRegistNo(int progrmRegistNo) {
 		this.progrmRegistNo = progrmRegistNo;
 	}
+	public int getCid() {
+		return cid;
+	}
+	public void setCid(int cid) {
+		this.cid = cid;
+	}
 	public String getActPlace() {
 		return actPlace;
 	}
 	public void setActPlace(String actPlace) {
 		this.actPlace = actPlace;
 	}
-
+	public String getPostAdres() {
+		return postAdres;
+	}
+	public void setPostAdres(String postAdres) {
+		this.postAdres = postAdres;
+	}
 	
 }

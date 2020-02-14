@@ -1,10 +1,10 @@
 package review;
 
 import java.util.List;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +18,15 @@ public class ReviewController {
    @Autowired
    ReviewService service;
 
+   //css 체크 : 뷰 체크용
+   @RequestMapping("/csstest")
+   public ModelAndView csstest() {
+      ModelAndView mav = new ModelAndView();
+      mav.setViewName("csstest");
+      return mav;
+   }
+   
+   
    // 전체 리뷰 리스트(게시판)
    @RequestMapping("/reviewlist")
    public ModelAndView reviewList() {
@@ -41,15 +50,17 @@ public class ReviewController {
 
    // 내가 쓴 리뷰 리스트
    @RequestMapping("/myreviewlist")
-   public ModelAndView myreviewList(@RequestParam("vid") int vid, HttpSession session) {
+   public ModelAndView myreviewList(HttpServletRequest req) {
       ModelAndView mav = new ModelAndView();
-     // vid= Integer.parseInt(session.getAttribute("vid").toString()); //로그인 정보
-      System.out.println(vid + "누가썼냐면!!");
+      HttpSession session = req.getSession();
+   
+      int vid = (Integer)session.getAttribute("volid");
+      System.out.println(vid+"Zzzzzzzzzzz");
       List<ReviewVO> list = service.myreviewlist(vid);
       mav.addObject("list", list);
- 
+
       mav.setViewName("myreviewlist");
-      System.out.println(list.size() + " : 내가쓴리뷰개수");
+       System.out.println(list.size() + " : 내가쓴리뷰개수"); 
       return mav;
    }
 
@@ -64,7 +75,7 @@ public class ReviewController {
    }
 
    // 리뷰 수정
-   @RequestMapping(value = "/reviewupdate", method = RequestMethod.POST)
+   @RequestMapping("/reviewupdate")
    public String reviewUpdateProcess(@ModelAttribute ReviewVO vo) throws Exception {
       service.reviewUpdate(vo);
       return "redirect:myreviewlist";

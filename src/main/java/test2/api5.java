@@ -17,6 +17,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import vinfo.VinfoVO;
+
 public class api5 {
    
     public final static String URL = "http://openapi.1365.go.kr/openapi/service/rest/VolunteerPartcptnService/getVltrPartcptnItem";
@@ -37,36 +39,45 @@ public class api5 {
       TestMybatisService service = new TestMybatisService(); //EmpDAO : Mybatis
       service.setDao(dao);
       
-      String actPlace = null;
+      /////center
       String email = null;
       String nanmmbyNm = null;
       String nanmmbyNmAdmn = null;
       String postAdres = null;
       String telno = null;
       String mnnstNm = null;
+      
+      /////vinfo
+    int progrmRegistNo = 0;
+  	String progrmBgnde = null;
+  	String actBeginTm = null;
+  	String noticeBgnde = null;
+  	String noticeEndde = null;
+  	int rcritNmpr = 0;
+  	//int appTotal;
+  	String srvcClCode = null;
+  	String progrmSj = null;
+  	String progrmCn = null;
+  	String actEndTm = null;
+  	//int cid = 0;
+  	String actPlace  = null;
+  	String progrmEndde = null;
+  	String actWkdy = null;
+  	//String postAdres = null;
 
       BufferedReader br = null;
-      
- 
+       
      //arraylist의 두번쨰값부터 비교
       for (Integer temp: numlist) {
-         System.out.println(temp);
-
-      
-      URL url = new URL(URL+"?ServiceKey="+KEY+"&progrmRegistNo="+temp+"&_type=json");
-   //   URL url = new URL(URL+"?ServiceKey="+KEY+"&progrmRegistNo=2611220&_type=json");
      
-      
-      
+      URL url = new URL(URL+"?ServiceKey="+KEY+"&progrmRegistNo="+temp+"&_type=json");
       
       HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
       urlconnection.setRequestMethod("GET");
       br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(), "UTF-8"));
       String result = "";
       String line;
-      
-      
-      
+           
       while ((line = br.readLine()) != null) {
          result = result + line + "\n";
       }
@@ -80,7 +91,7 @@ public class api5 {
          JSONObject items = (JSONObject) bodys.get("items");
          JSONObject item = (JSONObject) items.get("item");
          
-         actPlace = item.get("actPlace").toString();
+         //////center
          email = item.get("email").toString();
          nanmmbyNm = item.get("nanmmbyNm").toString();
          nanmmbyNmAdmn = item.get("nanmmbyNmAdmn").toString();
@@ -88,28 +99,80 @@ public class api5 {
          telno = item.get("telno").toString();
          mnnstNm = item.get("mnnstNm").toString(); 
          
-         System.out.println(email);
+         /////vinfo
+         progrmRegistNo = Integer.parseInt(item.get("progrmRegistNo").toString());
+     	 progrmBgnde = item.get("progrmBgnde").toString();
+     	 actBeginTm = item.get("actBeginTm").toString();
+     	 noticeBgnde = item.get("noticeBgnde").toString();
+     	 noticeEndde = item.get("noticeEndde").toString();
+     	 rcritNmpr = Integer.parseInt(item.get("rcritNmpr").toString());
+     	 //appTotal;
+     	 srvcClCode = item.get("srvcClCode").toString();
+     	 progrmSj= item.get("progrmSj").toString();
+     	 progrmCn= item.get("progrmCn").toString();
+     	 actEndTm= item.get("actEndTm").toString();
+     	//int cid;
+     	 actPlace = item.get("actPlace").toString();
+     	 progrmEndde= item.get("progrmEndde").toString();
+     	 actWkdy= item.get("actWkdy").toString();
+     	 //postAdres= item.get("postAdres").toString();
+
       }catch(Exception e) {
          e.printStackTrace();
       }
       
-     // if (email)
-      
-      HashMap<String, String> map = new HashMap<String, String>();
-      map.put("actPlace", actPlace);
+      ////center
+     HashMap<String, String> map = new HashMap<String, String>();
+      //map.put("actPlace", actPlace);
       map.put("email", email);
       map.put("nanmmbyNm", nanmmbyNm);
       map.put("nanmmbyNmAdmn", nanmmbyNmAdmn);
       map.put("postAdres", postAdres);
       map.put("telno", telno);
       map.put("mnnstNm", mnnstNm);
-         
-      List<TestVO> list2 = service.getEmpDynamicwhere(map);
-      for(TestVO vo: list2) {
-         System.out.println(vo.getNanmmbyNm() + " : " + vo.getNanmmbyNmAdmn());
-      }
-
+      
+      service.check(map);
+      //System.out.println("center 완료");
+      
+      ////vinfo 
+//      HashMap<String, Object> map2 = new HashMap<String, Object>();
+//      map2.put("progrmRegistNo", progrmRegistNo);
+//      map2.put("progrmBgnde", progrmBgnde);
+//      map2.put("actBeginTm", actBeginTm);
+//      map2.put("noticeBgnde", noticeBgnde);
+//      map2.put("noticeEndde", noticeEndde);
+//      map2.put("rcritNmpr", rcritNmpr);
+//      map2.put("srvcClCode", srvcClCode);
+//      map2.put("progrmSj", progrmSj);
+//      map2.put("progrmCn", progrmCn);
+//      map2.put("actEndTm", actEndTm);
+//      map2.put("actPlace", actPlace);
+//      map2.put("progrmEndde", progrmEndde);
+//      map2.put("actWkdy", actWkdy);
+//      map2.put("postAdres", postAdres);
+      
+      VinfoVO vo = new VinfoVO();
+      vo.setProgrmRegistNo(progrmRegistNo);
+      vo.setActBeginTm(actBeginTm);
+      vo.setProgrmBgnde(progrmBgnde);
+      vo.setActBeginTm(actBeginTm);
+      vo.setNoticeBgnde(noticeBgnde);
+      vo.setNoticeEndde(noticeEndde);
+      vo.setRcritNmpr(rcritNmpr);
+      vo.setSrvcClCode(srvcClCode);
+      vo.setProgrmSj(progrmSj);
+      vo.setProgrmCn(progrmCn);
+      vo.setActEndTm(actEndTm);
+      vo.setActPlace(actPlace);
+      vo.setProgrmEndde(progrmEndde);
+      vo.setActWkdy(actWkdy);
+      vo.setPostAdres(postAdres);
+      
+      service.insertVinfo(vo);
+      service.updateCid(map);
+      //System.out.println("vinfo 완료");
+      
+      
    }
-
 }
 }

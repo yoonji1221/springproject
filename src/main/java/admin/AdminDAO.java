@@ -27,11 +27,6 @@ public class AdminDAO {
 	
 	// °ü¸®ÀÚ userdelete
 	public int deleteuser(String id) {
-		int a = 0;
-		int result = session.selectOne("db.deleteuser", id);
-		if(result==1) {
-			a = session.selectOne("db.deletereview", id);
-		}
-		return a;
+		return session.delete("db.deleteuser", id);
 	}
 }

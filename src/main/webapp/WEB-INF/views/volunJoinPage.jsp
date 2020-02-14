@@ -9,6 +9,12 @@
 <title>Insert title here</title>
 <script src="/volunteer134/resources/jquery-3.2.1.min.js"></script>
 <script>
+function erchk() {
+	var flag =validation(); // 유효성 검사를 한 값
+	if(flag){
+		document.sub1.submit();
+	}
+};
 $(function(){
 	    $('#userPw').keyup(function(){
        		$('#chkNotice').html('');
@@ -111,25 +117,97 @@ $(function(){
     		});
     	})
     	
+    	//휴대폰 인증
+    	$("#phonecheck").click(function(){
+    		
+    		var number = Math.floor(Math.random() * 100000) + 100000;
+            if(number>100000){
+               number = number - 10000;
+            }
+
+            $("#text").val(number);      /* 난수로 생성된 인증번호를 hidden name : text 에 숨긴다 */
+         
+         var to = $("#to").val();
+ 		
+         if(to == "" || to == null){
+            alert("빈칸이나 공백을 채워주세요");
+             return; 
+         }
+         
+         var con_test = confirm("해당번호로 인증문자를 발송하시겠습니까?");   /* 문자를 보낼껀지 물어본다 */
+            
+            if(!con_test){
+            	return;
+            }
+    		
+    		$.ajax({
+  				url : '/volunteer134/volunjoin/phonecheck',
+  				data : {
+  					to: $("#to").val(),
+                    text: $("#text").val()
+  				},
+    			type : 'get',
+    			success : function(data){
+    				alert("문자 발송에 성공하였습니다");
+    				
+    				
+    			},error : function(e) {
+    				console.log(e);
+    			}
+    		});
+    	})
     	
-    });
+ });
+    
+function  validation(){
+	 var flag = false;
+	 var length = $("input:radio[name='gender']:checked").length;
+	if($("#id").val() == "" ){
+		console.log($("#id").val());
+		alert("아이디칸이 비었습니다");
+	}else if($("#userPw").val() == "" ){
+		alert("비밀번호칸이 비었습니다");
+	}else if($("#name").val() == "" ){
+		console.log($("#name").val());
+		alert("이름칸이 비었습니다");
+	}else if($("#phone").val() == "" ){
+		alert("전화번호칸이 비었습니다");
+	}else if($("#email").val() == "" ){
+		alert("이메일칸이 비었습니다");
+	}else if($("#address").val() == "" ){
+		alert("주소칸이 비었습니다");
+	}else if(length <= 0){
+		alert("성별을 선택하세요");
+	}else if($("#userNum").val() != $("#text").val()){
+		alert("인증번호를 확인해주세요");
+	}
+	else{
+		flag = true;
+	} return flag;
+}
+
 </script>
 </head>
 <body>
 
 <h1>회원가입</h1>
-<form action="<%=path %>/volunjoin" method="post">
+<form action="<%=path %>/volunjoin" name="sub1" method="post">
+<input type="hidden" id="text"><br>
 이름 : <input type="text" id="name"name="name"><br>
 아이디 : <input type="text" id="id" name="id"><br>
 <span id="id_check"></span><br>
 비밀번호 : <input type="password" id="userPw" name="pw" class="form-control"><br>
 비밀번호 확인 : <input type="password" id="userPwChk" class="form-control">&nbsp; 
 <span id="chkNotice"></span><br>
-전화번호 : <input type="text" name="phone" id="phone" class="form-control"><br> 
+전화번호 : <input type="text" name="phone" id="to" class="form-control">
+<input type="button" id="phonecheck" value="인증번호 받기"> <br>
+인증번호 :<input type="text" id="userNum" placeholder="인증번호를 입력해주세요"> <br>
+
+
 주소 : <input type="text" name="address"><br>
 이메일 : <input type="text" name="mail"><br>
-남성 <input type="radio" name="gender" value="male">
-여성 <input type="radio" name="gender" value="female"><br>
+남성 <input type="radio" id="gender" name="gender" value="male">
+여성 <input type="radio" id="gender1" name="gender" value="female"><br>
 선호 봉사 :
 <select name="large1" id="lar1" >
 <option>선택안함</option>
@@ -159,7 +237,8 @@ $(function(){
 <select name="medium3" id="med3">
    
 </select><br>
-<br><input type="submit" value="회원가입완료" >
+<br><input onclick="erchk()" type="button" id="join" value="회원가입완료" disabled="disabled" >
+
 </form>
 </body>
 </html>

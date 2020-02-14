@@ -13,9 +13,10 @@
 
 
 $(document).ready(function(){
+    var mid = $('input#hiddenmid').val();
     $("#btnDelete").click(function(){
         if(confirm("삭제하시겠습니까?")){
-            document.form1.action = "<%=path %>/reviewdelete";
+            document.form1.action = "<%=path %>/reviewdelete?mid=" +mid;
             document.form1.submit();
         }
     });
@@ -44,18 +45,19 @@ $(document).ready(function(){
 </head>
 <body>
 
+
 <c:forEach items="${list2 }" var="vo">
 
  <form name="form1" method="post">
     <div>
-        제목	<input name="title" id="title" size="80" value="${vo.title}" placeholder="제목을 입력해주세요">
+        제목   <input name="title" id="title" size="80" value="${vo.title}" placeholder="제목을 입력해주세요">
     </div>
     <div>
-        내용	<textarea name="contents" id="contents" rows="4" cols="80" placeholder="내용을 입력해주세요">${vo.contents}</textarea>
+        내용   <textarea name="contents" id="contents" rows="4" cols="80" placeholder="내용을 입력해주세요">${vo.contents}</textarea>
     </div>
     
     <div style="width:650px; text-align: center;">
-   		<input type="hidden" name="mid" value ="${vo.mid}"> 
+         <input type="hidden" id="hiddenmid" name="mid" value ="${vo.mid}"> 
         <button type="button" id="btnUpdete">수정</button>
         <button type="button" id="btnDelete">삭제</button>
     </div>

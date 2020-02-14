@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import vinfo.VinfoVO;
+
 @Service
 public class TestMybatisService implements TestService{
 	
@@ -16,21 +18,34 @@ public class TestMybatisService implements TestService{
 		this.dao = dao;
 	}
 
+
 	@Override
-	public List<TestVO> getList() {
+	public int check(HashMap<String, String> map) {
 		// TODO Auto-generated method stub
-		return null;
+		return dao.check(map);
 	}
 
-	@Override
-	public List<TestVO> getEmpDynamicwhere(HashMap<String, String> map) {
-		return dao.getEmpDynamicwhere(map);
-	}
 
 	@Override
-	public List<TestVO> vinfoinsert(HashMap<String, Object> map) {
-		return dao.insertvinfo(map);
+	public void insertVinfo(VinfoVO vo) {
+		
+		dao.insertVinfo(vo);
 	}
+
+
+	@Override
+	public void updateCid(HashMap<String, String> map) {
+		// TODO Auto-generated method stub
+		dao.updateCid(map);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 }

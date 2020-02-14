@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,10 +110,13 @@ $(function(){
 </script>
 
 <body>
+
+
 <h3>봉사자마이페이지</h3>
 
 <div style="position:fixed; top:70px; left:250px;">
 회원 번호 : ${vid}
+
 <form action="/volunteer134/volunteerMypage/${vid}" method="post">
 <c:forEach items="${list}" var="vo">
 이름 : ${vo.name}<br>
@@ -164,6 +168,7 @@ $(function(){
    
 </select><br>
 <br><input type="submit" value="정보 수정" id="submit">
+
 </form>
 </div>
 </body>

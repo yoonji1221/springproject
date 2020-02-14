@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import center.CenterVO;
 import preference.PagingVO;
 import preference.PreferenceVO;
 
@@ -113,8 +114,13 @@ public class VinfoServiceImpl implements VinfoService {
 	public List<VinfoVO> vinfodetail(int progrmRegistNo) {
 		return dao.vinfodetail(progrmRegistNo);
 	}
-	
-	
+
+	//센터정보가져오기
+	@Override
+	public  List<CenterVO> getCenterName(int cid){
+		return dao.getCenterName(cid);
+	}
+
 	
 	
 }

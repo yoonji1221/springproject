@@ -1,17 +1,12 @@
 package vinfo;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import center.CenterVO;
 import preference.PagingVO;
 import preference.PreferenceVO;
 
@@ -28,17 +24,59 @@ public class VinfoController {
 
 	@Autowired
 	VinfoService service;
-	
+
+	//신지
 	@RequestMapping(value="/vinfoupload",method=RequestMethod.GET)
-	public ModelAndView insertVinfo() {
+	public ModelAndView insertVinfo(HttpServletRequest req) {
 		ModelAndView mav= new ModelAndView();
+		HttpSession session = req.getSession();
+
+		
+		System.out.println((Integer)session.getAttribute("dbcid")+"zazazazazaz");
+	
+		int cid = (Integer)session.getAttribute("dbcid");
+		
+		System.out.println(cid+"ciiiiiiiiiiiiiiiiiid");
+		List<CenterVO> center = service.getCenterName(cid);
+	
+		mav.addObject("center",center);
+		mav.addObject("cid",cid);
+		
+
+		
 		List<String> large = service.getAllField();
+		
 		mav.addObject("large", large);
 		mav.setViewName("vinfoUpload");
 		System.out.println(large.size());
 		return mav;
 	}
 	
+	@RequestMapping(value="/vinfoupload", method=RequestMethod.POST)
+	public ModelAndView insertVinfoProcess(VinfoVO vo,HttpServletRequest request,
+			HttpServletResponse response){
+		ModelAndView mav= new ModelAndView();
+		String large = request.getParameter("large");
+		String medium = request.getParameter("medium");
+		
+		int cid = Integer.parseInt(request.getParameter("cid"));
+		String postAdres = request.getParameter("postAdres");
+		
+		vo  = new VinfoVO(vo, large, medium, cid, postAdres);
+		
+	
+		int result= service.insertVinfo(vo);
+		
+		//result = 0 이면 false
+		if (result == 0) {
+			mav.setViewName("vinfoUpload");
+		}else {
+			mav.setViewName("csstest");
+		}
+		
+		return mav;
+	}
+
 	
 	@RequestMapping(value="/vinfoupload/precheck",method=RequestMethod.GET)
 	@ResponseBody
@@ -47,43 +85,12 @@ public class VinfoController {
 		System.out.println(mlist.size()+"mlist개수 찍히나 보자");
 		return mlist;
 	}
-	//봉사 등록
-/*	@RequestMapping(value="/vinfoupload",method=RequestMethod.GET)
-	public ModelAndView insertVinfo() {
-		ModelAndView mav= new ModelAndView();
-		
-		List<String> large = service.getAllField();
-		List<VinfoVO> medium = service.getM();
-		
-		mav.addObject("large", large);
-		mav.addObject("medium", medium);
-		
-		mav.setViewName("vinfoUpload");
-		System.out.println(large.size());
-		return mav;
-	}
-	*/
-	@RequestMapping(value="/vinfoupload", method=RequestMethod.POST)
-	public ModelAndView insertVinfoProcess(VinfoVO vo,HttpServletRequest request,
-			HttpServletResponse response){
-		ModelAndView mav= new ModelAndView();
-		String large = request.getParameter("large");
-		String medium = request.getParameter("medium");
-		vo  = new VinfoVO(vo, large, medium);
-		int result= service.insertVinfo(vo);
-		//result = 0 이면 false
-		if (result == 0) {
-			mav.setViewName("vinfoUpload");
-		}else {
-			mav.setViewName("home");
-		}
-		
-		return mav;
-	}
+	
+
 	// 봉사 전체 리스트 --내꼬
 	@RequestMapping("/vinfolist")
 	public ModelAndView boardList(PagingVO vo, @RequestParam(value = "nowPage", required = false) String nowPage,
-			@RequestParam(value = "cntPerPage", required = false) String cntPerPage) throws Exception, SQLException {
+			@RequestParam(value = "cntPerPage", required = false) String cntPerPage,HttpServletRequest req) throws Exception, SQLException {
 		ModelAndView mav = new ModelAndView();
 		int total = service.getpaging();
 		if (nowPage == null && cntPerPage == null) {
@@ -94,6 +101,9 @@ public class VinfoController {
 		} else if (cntPerPage == null) {
 			cntPerPage = "10";
 		}
+//		HttpSession session = req.getSession();
+//		int i = (Integer)session.getAttribute("volid");
+//		System.out.println(i+"<--vinfo 세션");
 		vo = new PagingVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		List<VinfoVO> list = service.vinfolistPaging(vo);
 		List<VinfoVO> silist = service.silist();
@@ -141,7 +151,7 @@ public class VinfoController {
 //			System.out.println(resultlist.size()+"aaaaaa");
 //			return resultlist;
 //		}
-		
+	
 		if(detailaddress!=null && detailprefer.equals("") && address!=null && preference.equals("")) { //지역만 조회 dd
 			vo.setAddress(address);
 			vo.setDetailaddress(detailaddress);

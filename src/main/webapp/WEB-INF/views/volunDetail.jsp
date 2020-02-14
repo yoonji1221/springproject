@@ -8,68 +8,110 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="/WEB-INF/views/volunteerLeftMenu.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
-<style>
+<script src="/volunteer134/resources/jquery-3.2.1.min.js"></script>
+<style type="text/css">
 table{
 margin : auto;
-border: 2px solid gray;
+border: 2px solid pink;
 border-collapse: collapse;
 }
-
 td{
 text-align:center;
 border: 1px solid gray;
 padding: 10px;
 }
+td.info1{
+text-align:center;
+border: 1px solid gray;
+padding: 10px;
+width:100px;
+}
+
+td.info{
+text-align:center;
+border: 1px solid gray;
+padding: 10px;
+width:500px;
+word-break:break-all;
+}
 </style>
-
 </head>
+
+
+<script>
+$(function(){
+	$("#request_btn").on('click', function(){
+		alert("봉사 신청하시겠습니까?");
+})// btn end 
+
+});
+</script>
+
 <body>
-
 <h3> 상세 봉사 정보 페이지 </h3>
-<div style="position:fixed; top:70px; left:250px;">
-
+<div style="top:70px; left:250px;">
 <table>
 <c:forEach items="${list}" var="vo">
 <!-- 20200205 - 2020년02월05일로 변환하기 : 다시 해보기  -->
 <%-- <fmt:parseDate var="dateString" value="${vo.actBeginTm}" pattern="yyyyMMdd"/>
 <fmt:formatDate var="actBeginTm" value="${dateString}" pattern="yyyy-MM-dd"/> --%>
 <tr><td  colspan="2">${vo.progrmSj}</td></tr>
-<tr><td>봉사 번호</td> <td>${vo.progrmRegistNo}</td> </tr>
-<tr><td>봉사 날짜</td> <td>${vo.progrmBgnde}</td></tr>
-<tr><td>봉사 시간</td> <td>${vo.actBeginTm} ~ ${vo.actEndTm}</td></tr>
-<tr><td>모집 기간</td> <td>${vo.noticeBgnde} ~ ${vo.noticeEndde}</td></tr>
-<tr><td>모집 인원</td> <td>${vo.rcritNmpr}</td></tr>
-<tr><td>신청 인원</td> <td>${vo.appTotal}</td></tr>
-<tr><td>봉사 분야</td> <td>${vo.srvcClCode}</td></tr>
-<tr><td>봉사 장소</td> <td>${vo.actPlace}</td></tr>
-<tr><td>센터 이름</td> <td>${mnnstNm} <button onclick="window.open('')">상세보기</button></td></tr>
-<tr><td>상세 내용</td> <td>${vo.progrmCn}</td></tr>
-</c:forEach>
-</table>
-
-
+<tr><td class="info1">봉사 번호</td> <td class="info">${vo.progrmRegistNo}</td> </tr>
+<tr><td class="info1">봉사 날짜</td> <td class="info">${vo.progrmBgnde}</td></tr>
+<tr><td class="info1">봉사 시간</td> <td class="info">${vo.actBeginTm} ~ ${vo.actEndTm}</td></tr>
+<tr><td class="info1">모집 기간</td> <td class="info">${vo.noticeBgnde} ~ ${vo.noticeEndde}</td></tr>
+<tr><td class="info1">모집 인원</td> <td class="info">${vo.rcritNmpr}</td></tr>
+<tr><td class="info1">신청 인원</td> <td class="info">${vo.appTotal}</td></tr>
+<tr><td class="info1">봉사 분야</td> <td class="info">${vo.srvcClCode}</td></tr>
+<tr><td class="info1">봉사 장소</td> <td class="info">${vo.actPlace}</td></tr>
+<tr><td class="info1">봉사 기관 주소</td> <td class="info">${vo.postAdres}</td></tr>
+<tr><td class="info1">센터 이름</td> <td class="info">${mnnstNm} <button onclick="window.open('')">상세보기</button></td></tr>
+<tr><td class="info1">상세 내용</td> <td class="info">${vo.progrmCn}</td></tr>
 
 <%String old_url = request.getHeader("referer");
-String split_url = old_url.substring(35, 50);
-if(split_url.equals("volunteerMypage")){
+String split_url[]  = old_url.split("/");
+if(split_url[4].equals("volunteerMypage")){
 %>
-<button onclick="window.open('<%=Path%>/reviewwrite')">리뷰작성</button><!-- 경로추가 -->
-<button onclick="window.open('<%=Path%>/reviewupdate')">리뷰수정</button> <!-- 리뷰수정버튼 누르면, 리뷰삭제 + 수정 가능하도록 -->
+<jsp:include page="/WEB-INF/views/volunteerLeftMenu.jsp"></jsp:include>
+
+<tr><td  colspan="2"><button onclick="window.open('<%=Path%>/reviewwrite')" >리뷰작성</button> <button onclick="window.open('<%=Path%>/reviewupdate')">리뷰수정</button></td></tr>
+
 <%
-}else{
+}else if (split_url[4].contains("vinfolist")) { 
 %>
-<button onclick="volunRequest()">봉사 신청</button>
+
+<tr><td  colspan="2">
+<form action="/volunteer134/requestVolunWork" method="post">
+<c:forEach items="${list}" var="vo">
+<input type="hidden" id="progrmRegistNo" name="progrmRegistNo" value='${vo.progrmRegistNo}'>
+<input type="hidden" id="actPlace" name="actPlace" value='${vo.actPlace}'>
+<input type="hidden" id="postAdres" name="postAdres" value='${vo.postAdres}'>
+</c:forEach>
+<input type=submit id="request_btn" value="봉사 신청">
+</form>
+</td></tr>
+
 <%
-}
+}else{ //center mypage에서 조회할때 사용
 %>
+<tr><td  colspan="2">
+<form action="/volunteer134/requestVolunWork" method="post">
+<c:forEach items="${list}" var="vo">
+<input type="hidden" id="progrmRegistNo" name="progrmRegistNo" value='${vo.progrmRegistNo}'>
+<input type="hidden" id="actPlace" name="actPlace" value='${vo.actPlace}'>
+<input type="hidden" id="postAdres" name="postAdres" value='${vo.postAdres}'>
+</c:forEach>
+<input type=submit id="request_btn" value="봉사 신청">
+</form>
+</td></tr>
+<%} %>
+
+</c:forEach>
+</table>
 </div>
+
+
 </body>
-<script>
-function volunRequest() {
-	alert("신청");
-	location.href="<%=Path%>/requestVolunWork";
-};
-</script>
+
 </html>

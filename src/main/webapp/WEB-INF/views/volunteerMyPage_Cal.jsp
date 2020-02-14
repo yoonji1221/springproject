@@ -90,11 +90,17 @@ int newLine = 0;
 Calendar todayCal = Calendar.getInstance();
 SimpleDateFormat sdf = new SimpleDateFormat("yyyMMdd");
 int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
+
+
 %>
 
 <BODY>
-<div style="position:fixed; top:70px; left:250px;">
 
+<div style="position:fixed; top:70px; left:250px;">
+ <c:set var="vid" value="${vid}" />
+ <%
+      int vid = Integer.parseInt(pageContext.getAttribute("vid").toString()) ;
+ %>
    <form name="calendarFrm" id="calendarFrm" action="" method="post">
    <DIV id="content" style="width: 712px;">
    <table width="100%" border="0" cellspacing="1" cellpadding="1">
@@ -223,7 +229,7 @@ out.println("<BR>");
 /////////////////)
 for(int i = 0; i <BgndList.size(); i++){
    if(iUseDate == BgndList.get(i)){
-      out.println("<div id='detail'> <a href = '/volunteer134/volunteerMypage/"+request.getAttribute("vid")+"/Cal/"+VnumList.get(i)+"'>");
+      out.println("<div id='detail'> <a href = '/volunteer134/volunteerMypage/detail/"+vid+"?progrmRegistNo="+VnumList.get(i)+"'>");
       //out.println(VnumList.get(i) + "<br>");
       out.println(actPlaceList.get(i));
       out.println("</a></div>");

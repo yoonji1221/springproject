@@ -35,12 +35,12 @@ public class ReviewDAO {
 	public void reviewUpdate(ReviewVO vo) {
 		session.update("db.reviewupdate", vo);
 	}
-	
+
 	/*
 	 * public List<ReviewVO> reviewSelect(int mid){ return
 	 * session.selectList("db.reviewselect", mid); }
 	 */
-	
+
 	
 	public void reviewDelete(int mid) {
 		session.delete("db.reviewdelete", mid);

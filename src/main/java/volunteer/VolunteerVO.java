@@ -1,8 +1,5 @@
 package volunteer;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class VolunteerVO {
 	int vid;
 	String id;

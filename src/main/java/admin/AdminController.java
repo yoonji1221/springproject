@@ -49,16 +49,20 @@ public class AdminController {
 	public ModelAndView adminuserlist() {
 		ModelAndView mav = new ModelAndView();
 		List<VolunteerVO> list = service.adminuserlist();
+		
 		mav.addObject("userlist", list);
 		mav.setViewName("adminuserlist");
 		return mav;
 	}
 	//°ü¸®ÀÚ È¸¿øÅ»Åð
-	@ResponseBody
 	@RequestMapping(value="/adminuserlist/deleteuser", method = RequestMethod.GET)
+	@ResponseBody
 	public int deleteuser(@RequestParam String id) {
-		int bothdelete = service.deleteuser(id);
-		return bothdelete;
+		System.out.println(id);
+		
+		int delete = service.deleteuser(id);
+		System.out.println(delete);
+		return delete;
 	}
 
 }

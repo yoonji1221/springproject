@@ -1,13 +1,14 @@
 package vinfo;
 
-import java.util.HashMap;
 import java.util.List;
 
+import center.CenterVO;
 import preference.PagingVO;
 import preference.PreferenceVO;
 
 public interface VinfoService {
 
+	//신지
 	// 봉사 분야 조회
 	public List<String> getAllField();// large
 
@@ -18,6 +19,9 @@ public interface VinfoService {
 	// 센터에서 봉사 정보 입력
 	public int insertVinfo(VinfoVO vo);
 
+	public  List<CenterVO> getCenterName(int cid);
+	
+	//윤지
 	// 모든 봉사 조회
 	public List<VinfoVO> vinfolist();
 

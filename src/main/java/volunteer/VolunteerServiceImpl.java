@@ -15,6 +15,17 @@ public class VolunteerServiceImpl implements VolunteerService {
 	VolunteerDAO dao;
 
 	@Override
+	public List<VolunteerVO> recomanprefer(int vid) {
+		return dao.recomanprefer(vid);
+	}
+	
+	@Override
+	public List<VinfoVO> realrecoman(VolunteerVO vo) {
+		return dao.realrecoman(vo);
+	}
+
+
+	@Override
 	public int idcheck(String id) {
 		return dao.idcheck(id);
 	}
@@ -80,5 +91,14 @@ public class VolunteerServiceImpl implements VolunteerService {
 	public int volunlogin2(VolunteerVO vo) {
 		return dao.volunlogin2(vo);
 	}
+
+	//봉사 취소하면 신청인원 - 1
+	@Override
+	public void deleteApptotal(int progrmRegistNo) {
+		dao.deleteApptotal(progrmRegistNo);
+	}
+	
+	
+	
 	
 }

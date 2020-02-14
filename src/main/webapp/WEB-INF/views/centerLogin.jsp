@@ -10,7 +10,7 @@
 </head>
 <body>
 <h1>센터 로그인</h1>
-<form action="<%=path %>/vinfolist" method="post">
+<form action="<%=path %>/selectlogin/centerlogin" method="post">
 아이디(이메일)  <input type="text" name="cid"><br>
 비밀번호 (센터번호) <input type="password" name="email" ><br>
 <input type="submit" value="로그인" >
