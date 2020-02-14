@@ -6,8 +6,6 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="/volunteer134/resources/jquery-3.2.1.min.js"></script>
@@ -19,10 +17,11 @@ function deleteuser(id){
     		url : '/volunteer134/adminuserlist/deleteuser?id='+ id,
     		type : 'get',
     		success : function(data) {
-    			if(data.result>0) {
+    			if(data==1) {
     				console.log(id);
     				alert("탈퇴되었습니다.");
-    				location.href='/volunteer134/adminuserlist/user';
+    				/* location.href='/volunteer134/adminuserlist/user'; */
+    				location.reload();
         			
     			}else{
     				alert("탈퇴 실패했습니다.");
@@ -43,17 +42,17 @@ function deleteuser(id){
 
 <div class="table-responsive">
 <table class="table table-striped"><tr><th>아이디</th><th>이름</th><th>전화번호</th><th>이메일</th><th>관리</th></tr>
-<c:forEach items="${userlist }" var="membervo"> 
-<h3><tr><td>${membervo.id }
-</td><td>${membervo.name }
-</td><td>${membervo.phone }
-</td><td> ${membervo.email }
+<c:forEach items="${userlist }" var="userlist"> 
+<h3><tr><td>${userlist.id }
+</td><td>${userlist.name }
+</td><td>${userlist.phone }
+</td><td> ${userlist.mail }
 
-</td><td> <input type="button" value="탈퇴" onclick="deleteuser('${membervo.id}')">
+</td><td> <input type="button" value="탈퇴" onclick="deleteuser('${userlist.id}')">
 </td></tr>
 </h3>
 </c:forEach>
 </table></div>
-<input type="button" value="관리자 메뉴" onclick="location.href='admin.jsp'">
+<input type="button" value="관리자 메뉴" onclick="location.href='/adnminuserlist'">
 </body>
 </html>

@@ -49,7 +49,7 @@ public class api1 {
 		String rcritNmpr2=null;
 		BufferedReader br = null;
 
-		URL url = new URL(URL+"?ServiceKey="+KEY+"&numOfRows=300&pageNo=1&progrmBgnde=20200101&progrmEndde=20200505&_type=json");
+		URL url = new URL(URL+"?ServiceKey="+KEY+"&numOfRows=300&pageNo=3&progrmBgnde=20200101&progrmEndde=20200505&_type=json");
 		 
 		HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 		urlconnection.setRequestMethod("GET");

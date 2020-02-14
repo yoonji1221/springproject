@@ -17,7 +17,7 @@
   <transactionManager type="JDBC"/>
   <dataSource type="POOLED"> <!-- 일정 갯수 con pool 생성 -->
    <property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
-   <property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+   <property name="url" value="jdbc:oracle:thin:@192.168.15.100:1521:xe"/>
    <property name="username" value="bong4"/>
    <property name="password" value="134"/>
   </dataSource>

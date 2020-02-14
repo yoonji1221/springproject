@@ -8,6 +8,10 @@ import vinfo.VinfoVO;
 
 public interface VolunteerService {
 
+	//선호도 기반 추천 봉사
+	public List<VolunteerVO> recomanprefer(int vid);
+	public List<VinfoVO> realrecoman(VolunteerVO vo);
+	
 	// 아이디 중복체크
 	public int idcheck(String id);
 
@@ -43,4 +47,7 @@ public interface VolunteerService {
 	
 	//봉사 취소하기
 	public void deleteManage(ManageVO vo);
+	
+	//봉사 취소하면 신청인원 - 1
+	public void deleteApptotal(int progrmRegistNo);
 }

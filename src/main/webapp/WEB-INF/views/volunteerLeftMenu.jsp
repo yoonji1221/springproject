@@ -177,7 +177,7 @@ footer {
 
 </style>
 
-<script src="jquery-3.2.1.min.js"></script>
+<script src="/volunteer134/resources/jquery-3.2.1.min.js"></script>
 <script>
 $(function(){
    
@@ -202,8 +202,9 @@ $(function(){
         <ul class="group-list">
           <li>
             <li><a href="/volunteer134/volunteerMypage/${vid}/Cal">봉사 일정 확인</a></li>
-            <li><a href="#">봉사 시간 확인</a></li>
-            <li><a href="/volunteer134/myreviewlist?vid=${vid}">작성한 리뷰 확인</a></li>
+            <li><a href="/volunteer134/volunteerMypage/${vid}/recomanprefer">나만의 추천 봉사</a></li>
+            <li><a href="/volunteer134/volunteerMypage/${vid}/CheckTime">봉사 시간 확인</a></li>
+            <li><a href="/volunteer134/myreviewlist">작성한 리뷰 확인</a></li>
           </li>
         </ul>
       </li>
@@ -230,5 +231,6 @@ $(function(){
   </footer>
 </header>
 </div>
+
 </body>
 </html>

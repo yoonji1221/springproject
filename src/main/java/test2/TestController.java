@@ -88,7 +88,7 @@ public class TestController {
       map.put("telno", telno);
       map.put("mnnstNm", mnnstNm);
       
-      service.getEmpDynamicwhere(map);
+      //service.getEmpDynamicwhere(map);
 
       mav.addObject("result2", "insert¿Ï·á");
       mav.setViewName("/test/test");

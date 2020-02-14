@@ -1,12 +1,12 @@
 package vinfo;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import center.CenterVO;
 import preference.PagingVO;
 import preference.PreferenceVO;
 
@@ -39,6 +39,9 @@ public class VinfoDAO {
 	public int insertVinfo(VinfoVO vo) {
 		return session.insert("db.insertvinfo", vo);
 		
+	}
+	public  List<CenterVO> getCenterName(int cid){
+		return session.selectList("db.centername", cid);
 	}
 	
 //////////////////////////////////////

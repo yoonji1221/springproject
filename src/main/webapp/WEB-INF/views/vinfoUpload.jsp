@@ -92,7 +92,15 @@
 
 	<h1>봉사 정보 등록하기</h1>
 	<form action="<%=path%>/vinfoupload" method="post">
-		센터 이름: <br> 센터 주소: <br> 
+
+	<c:forEach items="${center }" var="vo">
+	<input type="hidden" id="postAdres" name="postAdres" value='${vo.postAdres}'>
+	<input type="hidden" id="cid" name="cid" value='${cid}'>
+		센터 이름: 	${vo.mnnstNm}	<br> 
+		센터 주소: 	${vo.postAdres}<br>
+		${cid}<br>
+	</c:forEach>
+ 
 		봉사 제목: <input type=text name="progrmSj"><br> 
 		봉사 날짜: <input type=text name="progrmBgnde"><br>
 		봉사 시작 시간: <input type=text name="actBeginTm"><br> 

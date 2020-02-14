@@ -15,7 +15,16 @@ public class VolunteerDAO {
 
 	@Autowired
 	SqlSession session;
-
+	//선호도 기반 추천 봉사
+	
+	public List<VolunteerVO> recomanprefer(int vid) {
+		return session.selectList("db.recomanprefer", vid);
+	}
+	
+	public List<VinfoVO> realrecoman(VolunteerVO vo) {
+		return session.selectList("db.realrecoman", vo);
+	}
+	
 	// 아이디중복체크
 	public int idcheck(String id) {
 		return session.selectOne("db.idcheck", id);
@@ -33,7 +42,6 @@ public class VolunteerDAO {
 	public int join(VolunteerVO vo) {
 		return session.insert("db.join", vo);
 	}
-	
 	/* =======효진========= */
 	//회원정보 수정 전 일부 정보 출력
 	public List<VolunteerVO> getVolunteer(int vid) {
@@ -76,5 +84,10 @@ public class VolunteerDAO {
 	//봉사취소하기
 	public void deleteManage(ManageVO vo) {
 		session.delete("db.deleteManage", vo);
+	}
+	
+	//봉사 취소하면 신청인원 - 1
+	public void deleteApptotal(int progrmRegistNo) {
+		session.update("db.deleteApptotal", progrmRegistNo);
 	}
 }
