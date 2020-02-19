@@ -69,7 +69,7 @@ public class CenterController {
           session.setAttribute("dbadm", centerloginlist.get(0).getNanmmbyNmAdmn());//담당자이름뽑아서 헤더에 씀
           System.out.println(session.getAttribute("dbcid")+" : centerController에서");
           model.addAttribute("centerloginlist", centerloginlist);
-          return "redirect:/vinfolist";
+          return "redirect:/home";
        }else {//로그인X
          response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -174,11 +174,7 @@ public class CenterController {
          model.addAttribute(timeList);
          
          url = "redirect:/insertVolTimeForm?result=success";
-         response.setContentType("text/html; charset=UTF-8");
-         PrintWriter out = response.getWriter();
-         out.println("<script>alert('"+vo2.getRealTime()+"시간 입력되었습니다.'); location.href='/volunteer134/insertVolTimeForm'; </script>"); //history.go(-1);        
-         out.flush();
-         out.close();
+ 
       }
       else {
          url = "redirect:/insertVolTimeForm?result=fail";

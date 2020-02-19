@@ -70,7 +70,7 @@ public class VolunteerController {
 
 			System.out.println(set);
 
-			//JSONObject result = coolsms.send(set); // 보내기&전송결과받기
+			JSONObject result = coolsms.send(set); // 보내기&전송결과받기
 
 			return "";
 

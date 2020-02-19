@@ -10,7 +10,10 @@ public class CenterVO {
    String email;
    String postAdres;
    String telno;
-   public CenterVO() {}
+
+   
+
+public CenterVO() {}
    public CenterVO(CenterVO vo, int cid) {
 	      setMnnstNm(vo.getMnnstNm());
 	      setNanmmbyNm(vo.getNanmmbyNm());
