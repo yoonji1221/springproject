@@ -15,7 +15,6 @@
 <typeAlias type="preference.PagingVO" alias="pagingvo"/>
 <typeAlias type="preference.PreferenceVO" alias="preferencevo"/>
 <typeAlias type="volunteer.VolunteerVO" alias="volunteervo"/>
-<typeAlias type="volunteerMypage.VolunteerVO" alias="volunteermypagevo"/>
 <typeAlias type="center.CenterVO" alias="centervo"/>
 <typeAlias type="admin.AdminVO" alias="adminvo"/>
 </typeAliases>

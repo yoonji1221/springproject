@@ -15,4 +15,7 @@ public interface AdminService {
 	
 	//userlist delete
 		public int deleteuser(String id);
+		public List<AdminVO> contactList();
+	      
+	      public int insertContact(AdminVO vo);
 }

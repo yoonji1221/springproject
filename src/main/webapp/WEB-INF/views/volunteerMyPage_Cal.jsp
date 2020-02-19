@@ -9,12 +9,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html lang="ko">
-<HEAD>
-<TITLE>캘린더</TITLE>
-<meta http-equiv="content-type" content="text/html; charset=utf-8">
-<script type="text/javaScript" language="javascript">       </script>
-<jsp:include page="/WEB-INF/views/volunteerLeftMenu.jsp"></jsp:include>
-<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+
+
 <style TYPE="text/css">
 body {
    scrollbar-face-color: #F6F6F6;
@@ -31,20 +27,20 @@ body {
 }
 
 td {
-   font-family: "돋움";
-   font-size: 9pt;
+   /* font-family: "돋움"; */
+   font-size: 11pt;
    color: #595959;
 }
 
 th {
-   font-family: "돋움";
-   font-size: 9pt;
+   /* font-family: "돋움"; */
+   font-size: 11pt;
    color: #000000;
 }
 
 select {
-   font-family: "돋움";
-   font-size: 9pt;
+   /* font-family: "돋움"; */
+   font-size: 11pt;
    color: #595959;
 }
 
@@ -53,13 +49,59 @@ select {
    text-overflow: ellipsis;
 }
 
-#detail{
-word-break:break-all;
-width : 100px;
-font-weight : bold;
+A:link {
+   font-size: 11pt;
+   /* font-family: "돋움"; */
+   color: #000000;
+   text-decoration: none;
 }
+
+A:visited {
+   font-size: 11pt;
+   /* font-family: "돋움"; */
+   color: #000000;
+   text-decoration: none;
+}
+
+A:active {
+   font-size: 11pt;
+   /* font-family: "돋움"; */
+   color: red;
+   text-decoration: none;
+}
+
+A:hover {
+   font-size: 11pt;
+   /* font-family: "돋움"; */
+   color: red;
+   text-decoration: none;
+}
+
+#shortening {
+  display:block;
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  width: 100px;
+
+}
+
 </style>
-</HEAD>
+<head>
+<TITLE>캘린더</TITLE>
+
+<jsp:include page="/WEB-INF/views/volunteerLeftMenu.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/header.jsp"></jsp:include>
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+<script type="text/javaScript" language="javascript"> </script>
+  <title>환영합니다! 134 자원봉사포털 소개</title>
+<meta name="description" content="Clean responsive bootstrap website template">
+  <meta name="author" content="">
+
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,600,700" rel="stylesheet">
+
+</head>
+
 <%
 
 Calendar cal = Calendar.getInstance();
@@ -96,28 +138,74 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
 <BODY>
 
-<div style="position:fixed; top:70px; left:250px;">
+
  <c:set var="vid" value="${vid}" />
  <%
       int vid = Integer.parseInt(pageContext.getAttribute("vid").toString()) ;
  %>
-   <form name="calendarFrm" id="calendarFrm" action="" method="post">
-   <DIV id="content" style="width: 712px;">
-   <table width="100%" border="0" cellspacing="1" cellpadding="1">
-      <tr>
-      <td align="right"><input type="button" onclick="javascript:location.href='<c:url value='/volunteerMypage/${vid}/Cal' />'" value="오늘" /></td>
-      </tr>
-   </table>
+================================================== -->
+  <section id="subintro">
 
-   <!--날짜 네비게이션  -->
-   <table width="100%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#F3F9D7" style="border: 1px solid #CED99C">
-      <tr>
-      <td height="60">
-         <table width="100%" border="0" cellspacing="0" cellpadding="0">
-         <tr>
-         <td height="10"></td>
-         </tr>
-         <tr>
+    <div class="container">
+      <div class="row">
+        <div class="span4">
+          <h3>Volunteer <strong>Calendar</strong></h3>
+        </div>
+        <div class="span8">
+          <ul class="breadcrumb notop">
+            <li><a href="/volunteer134/home">Home</a><span class="divider">/</span></li>
+            <li class="active">Lists</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+     
+    <form name="calendarFrm" id="calendarFrm" action="" method="post">
+
+      <div id="content" style="width: 1100px;padding-left: 300px;">
+
+
+
+         <table width="100%" border="0" cellspacing="1" cellpadding="1">
+
+            <tr>
+
+               <td align ="right">
+
+
+       </td>
+
+
+
+            </tr>
+
+         </table>
+
+         <!--날짜 네비게이션  -->
+
+         <table width="100%" border="0" cellspacing="1" cellpadding="1"
+            id="KOO" bgcolor="#F3F9D7" style="border: 1px solid #CED99C">
+
+
+
+            <tr>
+
+               <td height="60">
+
+
+
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+
+                     <tr>
+
+                        <td height="10"></td>
+
+                     </tr>
+                     
+                      <tr>
          <td align="center">
             <a href="<c:url value='/volunteerMypage' />?year=<%=year-1%>&amp;month=<%=month%>" target="_self"> 
             <!-- 이전해 -->
@@ -130,41 +218,73 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
             </a> <%}else{%> <b>&gt;</b> <%} %> <a href="<c:url value='/volunteerMypage' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self"> <!-- 다음해 -->
             </a></td>
          </tr>
+                  </table>
+
+
+
+               </td>
+
+            </tr>
+
          </table>
-      </td>
-      </tr>
-   </table>
 
          <br>
-         <table id="mainCalender" border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF" >
+
+         <br>
+            <table width="100%" border="0" cellspacing="1" cellpadding="1" bgcolor="#FFFFFF">
+
             <THEAD>
+
                <TR bgcolor="#CECECE">
+
                   <TD width='100px'>
-                     <DIV align="center">
+
+                     <DIV align="center" style="width:105px;height:25px;">
                         <font color="red">일</font>
                      </DIV>
+
                   </TD>
+
                   <TD width='100px'>
-                     <DIV align="center">월</DIV>
+
+                     <DIV align="center" style="width:105px;height:25px;">월</DIV>
+
                   </TD>
+
                   <TD width='100px'>
-                     <DIV align="center">화</DIV>
+
+                     <DIV align="center" style="width:105px;height:25px;">화</DIV>
+
                   </TD>
+
                   <TD width='100px'>
-                     <DIV align="center">수</DIV>
+
+                     <DIV align="center" style="width:105px;height:25px;">수</DIV>
+
                   </TD>
+
                   <TD width='100px'>
-                     <DIV align="center">목</DIV>
+
+                     <DIV align="center" style="width:105px;height:25px;">목</DIV>
+
                   </TD>
+
                   <TD width='100px'>
-                     <DIV align="center">금</DIV>
+
+                     <DIV align="center" style="width:105px;height:25px;">금</DIV>
+
                   </TD>
+
                   <TD width='100px'>
+
                      <DIV align="center">
-                        <font color="#529dbc">토</font>
+                        <font color="#529dbc" style="width:105px;height:25px;">토</font>
                      </DIV>
+
                   </TD>
+
                </TR>
+
             </THEAD>
             <TBODY>
                <TR>
@@ -200,10 +320,15 @@ if(iUseDate == intToday ) { //오늘 날짜는 배경색깔 변경
 
 //////////////////////////////////////////////hj
 List<VinfoVO> list = (List<VinfoVO>)request.getAttribute("list");
+int today = Integer.parseInt(request.getAttribute("today").toString());
+
 List<Integer> BgndList = new ArrayList<Integer>();
 List<Integer> VnumList = new ArrayList<Integer>();
 List<String> SjList = new ArrayList<String>();
 List<String> actPlaceList = new ArrayList<String>();
+List<String> srcritStateList = new ArrayList<String>();
+String srcritState;
+
 for (VinfoVO vo : list) {
    BgndList.add(Integer.parseInt(vo.getProgrmBgnde()));
    VnumList.add(vo.getProgrmRegistNo());
@@ -211,12 +336,26 @@ for (VinfoVO vo : list) {
    actPlaceList.add(vo.getActPlace());
 }
 
-//봉사자가 그동안 신청한 봉사일정 색칠하기
-for(int i = 0; i <BgndList.size(); i++){
-   if(iUseDate == BgndList.get(i)){
-      backColor = "pink";
+for(int i = 0; i <list.size(); i++){   
+   if(BgndList.get(i) < today){      
+      //srcritState = "봉사 완료";
+      srcritStateList.add("봉사완료");
+   }else{
+      srcritStateList.add("봉사대기");
+      //srcritState = "봉사 대기";
    }
 }
+
+//봉사자가 그동안 신청한 봉사일정 색칠하기
+for(int i = 0; i <list.size(); i++){   
+   if(BgndList.get(i) < today && iUseDate == BgndList.get(i) && srcritStateList.get(i).equals("봉사완료")){      
+       backColor ="#FAE0D4";
+   }else if(iUseDate == BgndList.get(i) && srcritStateList.get(i).equals("봉사대기")){
+      backColor ="#FFD9EC";
+   }
+}
+
+
 
 out.println("<TD valign='top' align='left' height='92px' bgcolor='"+backColor+"' nowrap>");
  %>
@@ -227,12 +366,28 @@ out.println("<TD valign='top' align='left' height='92px' bgcolor='"+backColor+"'
 out.println("<BR>");
 //out.println(iUseDate); //여기에 일정출력
 /////////////////)
+
+
+
 for(int i = 0; i <BgndList.size(); i++){
    if(iUseDate == BgndList.get(i)){
-      out.println("<div id='detail'> <a href = '/volunteer134/volunteerMypage/detail/"+vid+"?progrmRegistNo="+VnumList.get(i)+"'>");
-      //out.println(VnumList.get(i) + "<br>");
+      
+      if(srcritStateList.get(i).equals("봉사완료")){
+            out.println("<div style='color:red;'>"+srcritStateList.get(i)+"</div>");
+            out.println("<label id='shortening'><a href = '/volunteer134/volunteerMypage/detail/"+vid+"?progrmRegistNo="+VnumList.get(i)+"'>");     
+            out.println(actPlaceList.get(i));
+            out.println("</a></label>");
+        }
+        else if(srcritStateList.get(i).equals("봉사대기")){
+           out.println("<div style='color:blue;'>"+srcritStateList.get(i)+"</div>");
+           out.println("<label id='shortening'><a href = '/volunteer134/volunteerMypage/detail/"+vid+"?progrmRegistNo="+VnumList.get(i)+"'>");     
+            out.println(actPlaceList.get(i));
+            out.println("</a></label>");
+        }
+
+/*       out.println("<label id='shortening'><a href = '/volunteer134/volunteerMypage/detail/"+vid+"?progrmRegistNo="+VnumList.get(i)+"'>");     
       out.println(actPlaceList.get(i));
-      out.println("</a></div>");
+      out.println("</a></label>"); */
    }
 }
 ///////////////
@@ -260,6 +415,8 @@ while(newLine > 0 && newLine < 7){
 </TABLE>
 </DIV>
 </form>
-</div>
+ 
+<!-- footer add -->
+<jsp:include page="/WEB-INF/views/footer.jsp"></jsp:include>
 </BODY>
 </HTML>

@@ -123,4 +123,25 @@ public class VinfoDAO {
 	public List<VinfoVO> vinfodetail(int progrmRegistNo){
 		return session.selectList("db.vinfodetail",progrmRegistNo);
 	}
+	
+	//효진
+		//센터정보(전체) 지도에 표시하기 
+		public List<CenterVO> getTotalCenter(){
+			return session.selectList("db.centerTotal");
+		}
+		
+		//센터가 가진 전체 봉사 정보
+		public List<VinfoVO> centerVinfo(int cid){
+			return session.selectList("db.centervinfo", cid);
+		}
+		
+		//cid로 기관 이름 조회
+			public String centerName(int cid) {
+				return session.selectOne("db.centerName", cid);
+			}
+		
+		//지도에서 주소 검색
+		public List<CenterVO> searchAdd(String address){
+			return session.selectList("db.searchAdd", address);
+		}
 }

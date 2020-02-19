@@ -28,7 +28,15 @@ public class AdminServiceImpl implements AdminService {
 		return dao.deleteuser(id);
 	}
 
-	
+	 @Override
+	   public int insertContact(AdminVO vo) {
+	      return dao.insertContact(vo);
+	   }
+
+	   @Override
+	   public List<AdminVO> contactList() {
+	      return dao.contactList();
+	   }
 
 
 }

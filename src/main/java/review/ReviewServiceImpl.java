@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import manage.ManageVO;
+
 @Service
 public class ReviewServiceImpl implements ReviewService {
 	@Autowired
@@ -26,15 +28,15 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public void updateViewcount() {
-		dao.updateViewcount();	
+	public void updateViewcount(int rid) {
+		dao.updateViewcount(rid);	
 	}
 
-	@Override
-	public void reviewWrite(ReviewVO vo) {
-		dao.reviewWrite(vo);
-		
-	}
+	   @Override
+	   public int reviewWrite(ReviewVO vo) {
+	      return dao.reviewWrite(vo);
+	      
+	   }
 
 	@Override
 	public void reviewUpdate(ReviewVO vo) {
@@ -44,6 +46,11 @@ public class ReviewServiceImpl implements ReviewService {
 	
 	public void reviewDelete(int mid) {
 		dao.reviewDelete(mid);
+	}
+
+	@Override
+	public int reviewDupCheck(ManageVO vo) {
+		return dao.reviewDupCheck(vo);
 	}
 
 

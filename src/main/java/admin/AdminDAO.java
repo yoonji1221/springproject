@@ -29,4 +29,11 @@ public class AdminDAO {
 	public int deleteuser(String id) {
 		return session.delete("db.deleteuser", id);
 	}
+	public int insertContact(AdminVO vo) {
+	      return session.insert("db.insertContact", vo);
+	   }
+	   
+	   public List<AdminVO> contactList() {
+	      return session.selectList("db.contactList");
+	   }
 }

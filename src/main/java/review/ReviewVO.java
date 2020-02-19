@@ -11,7 +11,35 @@ public class ReviewVO {
    String name;
    String progrmSj;
    
+//Ãß°¡
+int vid;  
+int progrmRegistNo;
+
+ public int getProgrmRegistNo() {
+   return progrmRegistNo;
+}
+public void setProgrmRegistNo(int progrmRegistNo) {
+   this.progrmRegistNo = progrmRegistNo;
+}
+public int getVid() {
+   return vid;
+}
+public void setVid(int vid) {
+   this.vid = vid;
+}
+
+
+public ReviewVO() {}
    
+   public ReviewVO(ReviewVO vo) {
+      setRid(vo.rid);
+      setTitle(vo.title);
+      setMid(vo.mid);
+      setContents(vo.contents);
+      setViewcount(vo.viewcount);
+      setVid(vo.vid);
+      setProgrmRegistNo(vo.progrmRegistNo);
+   }
 
    public int getRid() {
       return rid;

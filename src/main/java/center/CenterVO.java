@@ -12,12 +12,13 @@ public class CenterVO {
    String telno;
    public CenterVO() {}
    public CenterVO(CenterVO vo, int cid) {
-      setMnnstNm(vo.getMnnstNm());
-      setNanmmbyNm(vo.getNanmmbyNm());
-      setNanmmbyNmAdmn(vo.getNanmmbyNmAdmn());
-      setTelno(vo.getTelno());
-      setCid(cid);
-   }
+	      setMnnstNm(vo.getMnnstNm());
+	      setNanmmbyNm(vo.getNanmmbyNm());
+	      setNanmmbyNmAdmn(vo.getNanmmbyNmAdmn());
+	      setTelno(vo.getTelno());
+	      setPostAdres(vo.getPostAdres());
+	      setCid(cid);
+	   }
    public CenterVO(CenterVO vo, int cid, String email) {
       setCid(cid);
       setEmail(email);

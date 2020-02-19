@@ -1,8 +1,11 @@
 package volunteer;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -34,12 +37,17 @@ public class VolunteerController {
 	// 봉사자 회원가입
 	@RequestMapping(value = "/volunjoin", method = RequestMethod.POST)
 	public String join(VolunteerVO vo1, String large1, String medium1, String large2, String medium2, String large3,
-			String medium3) {
+			String medium3,HttpServletResponse response) throws Exception {
 		String path = null;
 		VolunteerVO vo = new VolunteerVO(vo1, large1, medium1, large2, medium2, large3, medium3);
 		int result = volservice.join(vo);
 		if (result == 1) {
-			path = "redirect:/selectlogin/volunlogin";
+			 response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('회원가입에 성공하였습니다.'); location.href='/volunteer134/home'; </script>"); //history.go(-1);        
+	            out.flush();
+	            out.close();  
+			path = "redirect:/volunteer134/home";
 		}
 		return path;
 	}
@@ -87,31 +95,38 @@ public class VolunteerController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) {
-		session.invalidate();
-		return "redirect:/vinfolist";
-	}
 	
-	// 봉사자 로그인화면
-	@RequestMapping(value = "/selectlogin/volunlogin", method = RequestMethod.POST)
-	public ModelAndView volunlogin(@ModelAttribute("VolunteerVO") VolunteerVO vo, HttpServletRequest request,HttpSession session)
-			throws Exception {
-
-		int result = volservice.volunlogin(vo);
-		ModelAndView mav = new ModelAndView();
-		int vid = 0;
-		String path = null;
-		if (result == 1) {
-			session.setAttribute("dbid", vo.getId());
-			vid = volservice.volunlogin2(vo);
-			session.setAttribute("volid", vid);
-			System.out.println((Integer) session.getAttribute("volid") + "<--로그인하고 세션아이디");
-			mav.addObject("vid", vid);
-			mav.setViewName("redirect:/vinfolist");
-		}
-		System.out.println("끝"+session.getId());
-		return mav;
-	}
+	   // 봉사자 로그인화면 //0216효진수정
+	   @RequestMapping(value = "/selectlogin/volunlogin", method = RequestMethod.POST)
+	   public ModelAndView volunlogin(@ModelAttribute("VolunteerVO") VolunteerVO vo, HttpServletRequest request,HttpSession session, HttpServletResponse response)
+	         throws Exception {
+	      
+	      int result = volservice.volunlogin(vo);
+	      ModelAndView mav = new ModelAndView();
+	      int vid = 0;
+	      String path = null;
+	      if (result == 1) {
+	         session.setAttribute("dbid", vo.getId());
+	         vid = volservice.volunlogin2(vo);
+	         session.setAttribute("volid", vid);
+	         System.out.println((Integer) session.getAttribute("volid") + "<--로그인하고 세션아이디");
+	         mav.addObject("vid", vid);
+	         mav.setViewName("redirect:/home");
+	      }else {
+	         response.setContentType("text/html; charset=UTF-8");
+	            PrintWriter out = response.getWriter();
+	            out.println("<script>alert('입력한 정보가 틀렸습니다.'); location.href='/volunteer134/selectlogin'; </script>"); //history.go(-1);        
+	            out.flush();
+	            out.close();         
+	      }
+	      return mav;
+	   }
+	 //로그아웃 // 홈으로 2016 효진 수정
+	   @RequestMapping(value = "/logout", method = RequestMethod.GET)
+	   public String logout(HttpSession session) {
+	      session.invalidate();
+	      return "redirect:/home";
+	   }
+	
 
 }

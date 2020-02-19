@@ -121,6 +121,29 @@ public class VinfoServiceImpl implements VinfoService {
 		return dao.getCenterName(cid);
 	}
 
-	
+	//효진
+		//센터정보(전체) 지도에 표시하기 
+		@Override
+		public List<CenterVO> getTotalCenter() {
+			return dao.getTotalCenter();
+		}
+
+		//센터가 가진 전체 봉사 정보
+		@Override
+		public List<VinfoVO> centerVinfo(int cid) {
+			return dao.centerVinfo(cid);
+		}
+
+		//cid로 기관 이름 조회
+		@Override
+		public String centerName(int cid) {
+			return dao.centerName(cid);
+		}
+
+		@Override
+		public List<CenterVO> searchAdd(String address) {
+			return dao.searchAdd(address);
+		}
+		
 	
 }

@@ -30,4 +30,44 @@ public class ParameterVO {
 		this.detailprefer = detailprefer;
 	}
 	
+	//0217È¿Áø
+	int progrmRegistNo;
+	String mnnstNm;
+	String progrmBgnde;
+	String progrmSj;
+	String realtime;
+	public int getProgrmRegistNo() {
+		return progrmRegistNo;
+	}
+	public void setProgrmRegistNo(int progrmRegistNo) {
+		this.progrmRegistNo = progrmRegistNo;
+	}
+	public String getMnnstNm() {
+		return mnnstNm;
+	}
+	public void setMnnstNm(String mnnstNm) {
+		this.mnnstNm = mnnstNm;
+	}
+	public String getProgrmBgnde() {
+		return progrmBgnde;
+	}
+	public void setProgrmBgnde(String progrmBgnde) {
+		this.progrmBgnde = progrmBgnde;
+	}
+	public String getProgrmSj() {
+		return progrmSj;
+	}
+	public void setProgrmSj(String progrmSj) {
+		this.progrmSj = progrmSj;
+	}
+	public String getRealtime() {
+		return realtime;
+	}
+	public void setRealtime(String realtime) {
+		this.realtime = realtime;
+	}
+	
+	
+	
+	
 }

@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>환영합니다! 134 자원봉사포털 소개</title>
+<meta name="description" content="Clean responsive bootstrap website template">
 
 <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css'>
 <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300'>
@@ -42,16 +43,43 @@ header {
 /**
  * Styling top level items
  */
-.nav a,
+/* .nav a {
+  display: block;
+  padding: .85rem;
+  color: #;
+  background-color: #666;
+  box-shadow: inset 0 -1px #1d1d1d;
+  -webkit-transition: all .25s ease-in;
+          transition: all .25s ease-in;
+} */
+
+ a.submenu {
+  display: block;
+  padding: .85rem;
+  color: #fff;
+  background-color: #5b5b5b;
+/*   box-shadow: inset 0 -1px #333; */
+  -webkit-transition: all .25s ease-in;
+          transition: all .25s ease-in;
+font-size: 13px;
+    font-weight: normal;
+    line-height: 20px;
+} 
+
+
+
 .nav label {
   display: block;
   padding: .85rem;
   color: #fff;
-  background-color: #151515;
-  box-shadow: inset 0 -1px #1d1d1d;
+  background-color: #333;
+  box-shadow: inset 0 -1px #668b75;
   -webkit-transition: all .25s ease-in;
           transition: all .25s ease-in;
 }
+/* 
+box-shadow: inset 0 -1px #1d1d1d;
+#4eb478; 초록색*/
 .nav a:focus, .nav a:hover,
 .nav label:focus,
 .nav label:hover {
@@ -185,7 +213,7 @@ $(function(){
 </script>
 </head>
 <body>
-<div style="position:fixed; top:70px; left:0; widt:200px; height:300px; z-index:999;">
+<div style="position:fixed; top:70px; left:0; widt:200px; height:300px; z-index:999; margin-top:190px;">
 <header role="banner">
   <nav class="nav" role="navigation">
     <ul class="nav__list">
@@ -193,7 +221,7 @@ $(function(){
         <input id="group-1" type="checkbox" hidden />
         <label for="group-1"><span class="fa fa-angle-right"></span> 회원정보관리</label>
         <ul class="group-list">
-          <li><a href="/volunteer134/volunteerMypage/${vid}" id="first_1">기존정보</a></li>
+          <li><a href="/volunteer134/volunteerMypage/${vid}" id="first_1" class="submenu">기존정보</a></li>
         </ul>
       </li>
       <li>
@@ -201,10 +229,10 @@ $(function(){
         <label for="group-2"><span class="fa fa-angle-right"></span> 봉사활동 참여정보</label>
         <ul class="group-list">
           <li>
-            <li><a href="/volunteer134/volunteerMypage/${vid}/Cal">봉사 일정 확인</a></li>
-            <li><a href="/volunteer134/volunteerMypage/${vid}/recomanprefer">나만의 추천 봉사</a></li>
-            <li><a href="/volunteer134/volunteerMypage/${vid}/CheckTime">봉사 시간 확인</a></li>
-            <li><a href="/volunteer134/myreviewlist">작성한 리뷰 확인</a></li>
+            <li><a href="/volunteer134/volunteerMypage/<%=session.getAttribute("volid") %>/Cal" class="submenu">봉사 일정 확인</a></li>
+            <li><a href="/volunteer134/volunteerMypage/${vid}/recomanprefer" class="submenu">나만의 추천 봉사</a></li>
+            <li><a href="/volunteer134/volunteerMypage/${vid}/CheckTime" class="submenu">봉사 시간 확인</a></li>
+            <li><a href="/volunteer134/myreviewlist/${vid}" class="submenu">작성한 리뷰 확인</a></li>
           </li>
         </ul>
       </li>
@@ -213,7 +241,8 @@ $(function(){
         <label for="group-3"><span class="fa fa-angle-right"></span>신청 현황</label>
         <ul class="group-list">
           <li>
-            <li><a href="/volunteer134/volunteerMypage/${vid}/ApplicationList">신청 현황 조회</a></li>
+            <li><a href="/volunteer134/volunteerMypage/<%=session.getAttribute("volid") %>/ApplicationList" class="submenu">
+            신청 현황 조회</a></li>
           </li>
         </ul>
       </li>
@@ -221,14 +250,7 @@ $(function(){
       </li>
     </ul>
   </nav>
-  <footer>
-    <ul class="soc-media">
-      <li><a href="#" target="_blank"><span class="fa fa-twitter"></span></a></li>
-      <li><a href="#" target="_blank"><span class="fa fa-facebook"></span></a></li>
-      <li><a href="https://www.1365.go.kr/vols/main.do" target="_blank"><span class="fa fa-google-plus"></span></a></li>
-      <li><a href="#" target="_blank"><span class="fa fa-globe"></span></a></li>
-    </ul>
-  </footer>
+
 </header>
 </div>
 

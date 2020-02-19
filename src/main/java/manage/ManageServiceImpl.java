@@ -18,6 +18,11 @@ public class ManageServiceImpl implements ManageService {
 		dao.insertManage(map);	
 	}
 
+	@Override
+	public int checkApplication(ManageVO vo) {
+		return dao.checkApplication(vo);
+	}
+
 	//봉사신청시 신청인원 + 1
 	@Override
 	public void updateApptotal(int progrmRegistNo) {

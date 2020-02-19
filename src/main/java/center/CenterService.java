@@ -11,7 +11,7 @@ public interface CenterService {
    //센터 로그인
    public List<CenterVO> centerlogin(CenterVO vo);
    
-   
+   public List<CenterVO> centerDetail(int cid);
    // 다연이
    // 센터에서 올린 봉사 달력보여주기
    public List<VinfoVO> getMyCenterCal(int cid);

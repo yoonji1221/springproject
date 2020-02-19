@@ -13,7 +13,10 @@ public class ManageDAO {
 	
 	@Autowired
 	SqlSession session;
-	
+	//봉사신청전에 봉사 신청중복 체크
+	public int checkApplication(ManageVO vo) {
+		return session.selectOne("db.checkApplication", vo);
+	}
 	//봉사신청
 	public void insertManage(HashMap<String, Object> map) {
 		session.insert("db.insertManage",map);

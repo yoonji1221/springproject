@@ -12,6 +12,9 @@ public class VolunteerVO {
 	String preference3;
 	String gender;
 	String name;
+	
+	//20200218 À±Áö Ãß°¡
+	String detailaddress;
 	public VolunteerVO() {
 		
 	}
@@ -116,6 +119,14 @@ public class VolunteerVO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDetailaddress() {
+		return detailaddress;
+	}
+
+	public void setDetailaddress(String detailaddress) {
+		this.detailaddress = detailaddress;
 	}
 
 }

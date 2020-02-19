@@ -18,7 +18,10 @@ public class CenterServiceImpl implements CenterService {
    public List<CenterVO> centerlogin(CenterVO vo) {
       return dao.centerlogin(vo);
    }
-
+	@Override
+	public List<CenterVO> centerDetail(int cid) {
+		return dao.centerDetail(cid);
+	}
    //´Ù¿¬ÀÌ
    @Override
    public List<VinfoVO> getMyCenterCal(int cid) {

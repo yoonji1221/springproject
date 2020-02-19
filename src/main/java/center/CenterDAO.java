@@ -19,6 +19,10 @@ public class CenterDAO {
    public List<CenterVO> centerlogin(CenterVO vo) {
       return sqlsession.selectList("db.centerlogin", vo);
    }
+   //신지
+   public List<CenterVO> centerDetail(int cid){
+		return sqlsession.selectList("db.centerdetail", cid);
+	}
    
    //다연이
    //홈화면 - 전체 봉사 조회

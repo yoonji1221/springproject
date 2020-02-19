@@ -6,6 +6,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import manage.ManageVO;
+
 @Component
 public class ReviewDAO {
 	@Autowired
@@ -24,13 +26,13 @@ public class ReviewDAO {
 		return list2;
 	}
 	
-	public void updateViewcount() {
-		session.update("db.updateviewcount");
+	public void updateViewcount(int rid) {
+		session.update("db.updateviewcount", rid);
 	}
 	
-	public void reviewWrite(ReviewVO vo) {
-		session.insert("db.reviewwrite", vo);
-	}
+	  public int reviewWrite(ReviewVO vo) {
+	      return session.insert("db.reviewwrite", vo);
+	   }
 	
 	public void reviewUpdate(ReviewVO vo) {
 		session.update("db.reviewupdate", vo);
@@ -44,5 +46,11 @@ public class ReviewDAO {
 	
 	public void reviewDelete(int mid) {
 		session.delete("db.reviewdelete", mid);
+	}
+	
+	
+	//////////dÀ±Áö///////////¸®ºä ¶Ç¾²±â ¸·±â
+	public int reviewDupCheck(ManageVO vo) {
+		return session.selectOne("db.reviewDupCheck", vo);
 	}
 }
